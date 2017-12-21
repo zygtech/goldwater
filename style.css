@@ -1,0 +1,25 @@
+body { background: white; font-family: 'Titillium Web', sans-serif; font-size: 14px; box-sizing: border-box; margin: 10px 0; color: #58585a;}
+.container { width: 800px; margin: auto; }
+.ribbon { background: lightgray; padding: 10px 0; }
+.main { min-height: 400px; padding: 40px 0; }
+.logout { font-size: 14px; font-weight: normal; }
+#box { width: 400px; margin: auto; text-align: center; padding: 5px; }
+a { color: #58585a; text-decoration: none; }
+h1 { padding: 5px 0; }
+.field,input,textarea,select { background: white; border: none; border-radius: 5px; padding: 5px; font-family: 'Titillium Web', sans-serif; color: #58585a; } 
+.field,input[type=text],input[type=number],input[type=password],input[type=submit],input[type=file],input[type=date],textarea,select { width: 100%; background: lightgray; }
+.field { width: 98%; }
+textarea { height: 110px; resize: none; font-size: 14px; color: #58585a; }
+textarea.desc { height: 410px; }
+select { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+table { width: 100%; }
+td { font-size: 14px; }
+.data tr:nth-child(even) { background: #e7e7e8; }
+.data td { height: 30px; }
+.data td a { background: #58585a; padding: 2px 4px; border-radius: 5px; color: #e7e7e8; }
+button { border: none; color: #58585a; background: none; cursor: pointer; }
+.data { border-spacing: 0; }
+th { text-align: left; }
+img { max-height: 60px; margin: 0 auto; }
+.right { float: right; padding: 8px 0; }
+.worklink { color: gray; }
