@@ -24,6 +24,13 @@
 		{
 			$.ajax('clientswitch.php?id='+id+'&priority='+sel.value);	
 		}
+        function checkall()
+        {
+            if ($('.all').is(':checked')) 
+                $('.emails').prop('checked', true);
+            else
+                $('.emails').prop('checked', false);
+        }
 	</script>
 </head>
 
@@ -45,15 +52,16 @@
 	<?php
 		if ($_GET['order']=='DESC') $order=' DESC';
 		if ($_GET['sort']=='') 
-			$result = mysqli_query($link,'SELECT id,fullname,company,mobile,priority,category FROM `clients` ORDER BY id;');
+			$result = mysqli_query($link,'SELECT id,fullname,company,mobile,priority,category,mail FROM `clients` ORDER BY id;');
 		else
-			$result = mysqli_query($link,'SELECT id,fullname,company,mobile,priority,category FROM `clients` ORDER BY ' . $_GET['sort'] . $order . ';');
+			$result = mysqli_query($link,'SELECT id,fullname,company,mobile,priority,category,mail FROM `clients` ORDER BY ' . $_GET['sort'] . $order . ';');
 		?>
-		<tr><th style="width: 10%;"><a href="clients.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CLIENT ID</a></th><th style="width: 25%;"><a href="clients.php?sort=company<?php if ($_GET['sort']=='company' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">COMPANY</a></th><th style="width: 25%;"><a href="clients.php?sort=fullname<?php if ($_GET['sort']=='fullname' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">FULL NAME</a></th><th style="width: 20%;"><a href="clients.php?sort=mobile<?php if ($_GET['sort']=='mobile' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">MOBILE</a></th><th><a href="clients.php?sort=category<?php if ($_GET['sort']=='category' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CATEGORY</a></th><th><a href="clients.php?sort=priority<?php if ($_GET['sort']=='priority' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">PRI</a></th><th></th><th></th></tr>
+        <form action="mailform.php" method="POST">
+		<tr><th><input type="checkbox" class="all" name="all" onclick="checkall();" /></th><th style="width: 10%;"><a href="clients.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CLIENT ID</a></th><th style="width: 20%;"><a href="clients.php?sort=company<?php if ($_GET['sort']=='company' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">COMPANY</a></th><th style="width: 25%;"><a href="clients.php?sort=fullname<?php if ($_GET['sort']=='fullname' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">FULL NAME</a></th><th style="width: 20%;"><a href="clients.php?sort=mobile<?php if ($_GET['sort']=='mobile' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">MOBILE</a></th><th><a href="clients.php?sort=category<?php if ($_GET['sort']=='category' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CATEGORY</a></th><th><a href="clients.php?sort=priority<?php if ($_GET['sort']=='priority' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">PRI</a></th><th></th><th></th></tr>
 		<?php
 		while ($row = mysqli_fetch_array($result)) {
 			if ($_GET['q']=='' || strpos(strtolower('CL' . sprintf('%04d',$row['id'])), strtolower($_GET['q']))!==false || strpos(strtolower($row['fullname']), strtolower($_GET['q']))!==false || strpos(strtolower($row['company']), strtolower($_GET['q']))!==false || strpos(strtolower($row['mail']), strtolower($_GET['q']))!==false) {
-				echo '<tr><td style="width: 10%;">CL' . sprintf('%04d',$row['id']) . '</a></td><td style="width: 25%;">' . $row['company'] . '</td><td style="width: 25%;">' . $row['fullname'] . '</td><td style="width: 20%;">' . $row['mobile'];
+				echo '<tr><td><input type="checkbox" class="emails" name="emails[]" value="' . $row['mail'] . '" /></td><td style="width: 10%;">CL' . sprintf('%04d',$row['id']) . '</a></td><td style="width: 20%;">' . $row['company'] . '</td><td style="width: 25%;">' . $row['fullname'] . '</td><td style="width: 20%;">' . $row['mobile'];
 				echo '</td><td>';
 				?>
 				<select onchange="category(this,<?php echo $row['id']; ?>);">
@@ -75,7 +83,7 @@
 		mysqli_free_result($result);
 		mysqli_close($link);
 	?>
-	</table>
+	</table><br /><input type="submit" value="Send e-mails" /></form>
 	</div></div>
 	<div class="ribbon"><div class="container">
 	<?php require_once('menu.php'); ?>
