@@ -12,11 +12,16 @@
 <html>
 
 <head>
-	<title>Client Edit</title>
+	<title>Mail Edit</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C300%2C900%7CPT+Sans%3A700&#038;subset=latin" rel="stylesheet">
 	<script src="limit.js"></script>
+	<script src="tinymce/tinymce.min.js"></script>
+	<script>tinymce.init({ selector:'textarea', menubar: false, height: 300 });</script>
+	<style>
+		input[type=text] { border-radius: 0px; border: 1px solid #c5c5c5; background: #ffffff; }
+	</style>
 </head>
 
 <body>
@@ -25,7 +30,7 @@
 	<h1> Welcome: <?php echo $_SESSION['login']; ?> <span class="logout">(<a href="index.php?logout=true">log out</a>)</span></h1>
 	</div>
 	<div class="ribbon"><div class="container">
-	<h2> CLIENT EDIT </h2>
+	<h2> MAIL EDIT </h2>
 	</div></div>
 	<div class="main"><div class="container">
 	<form action="mailsend.php" method="POST">
