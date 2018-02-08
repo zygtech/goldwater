@@ -21,6 +21,7 @@
 	<script>tinymce.init({ selector:'textarea', menubar: false, height: 300 });</script>
 	<style>
 		input[type=text] { border-radius: 0px; border: 1px solid #c5c5c5; background: #ffffff; }
+		textarea { height: 300px; }
 	</style>
 </head>
 
