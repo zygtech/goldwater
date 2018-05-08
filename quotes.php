@@ -13,7 +13,32 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C300%2C900%7CPT+Sans%3A00&#038;subset=latin" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 	<script src="limit.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+	<script>
+		$(function(){
+			$('.confirm').click(function(event){
+				event.preventDefault();
+				$.confirm({
+					title     : 'Confirm',
+					content   : 'Are you sure?',
+					buttons   : {
+						'Yes'   : {
+							action: function(){
+								window.location = $(event.currentTarget).attr('href');
+							}
+
+						},
+						'No'   : {
+							action: function(){} 
+						}
+					}
+				});		
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -44,7 +69,7 @@
 			if ($_GET['q']=='' || strpos(strtolower('QTE' . sprintf('%04d',$row['id'])), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['company']), strtolower($_GET['q']))!==false || strpos(strtolower($row['fullname']), strtolower($_GET['q']))!==false) {				
 				echo '<tr><td style="width: 20%;">QTE' . sprintf('%04d',$row['id']) . '</td><td style="width: 30%;">' . $row['name'] . '</td><td style="width: 18%;">' . $row['added'] . '</td><td style="width: 23%;">';
 				if ($row['company']!='') echo $row['company']; else echo $row['fullname'];
-				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a href="quotepdf.php?id=' . $row['id'] . '"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></td><td><a href="quote.php?id=' . $row['id'] . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a href="quotedel.php?id=' . $row['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>';
+				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a href="quotepdf.php?id=' . $row['id'] . '"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></td><td><a href="quote.php?id=' . $row['id'] . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a class="confirm" href="quotedel.php?id=' . $row['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>';
 			}
 		}
 		mysqli_free_result($result);
