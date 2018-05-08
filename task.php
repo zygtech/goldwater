@@ -76,8 +76,8 @@
 				if ($row['archive']==0)
 					echo '<td style="width: 6%; text-align: right;">';
 				else
-					echo '<td style="width: 6%; text-align: right;"><a href="taskedit.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '"><i class="fa fa-undo" aria-hidden="true"></i></a>';	
-				echo ' <a class="confirm" href="taskdel.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '">';
+					echo '<td style="width: 6%; text-align: right;"><a href="taskedit.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '" title="Task revive"><i class="fa fa-undo" aria-hidden="true"></i></a>';	
+				echo ' <a class="confirm" href="taskdel.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '" title="Task tick/delete">';
 				if ($row['archive']==1) echo '<i class="fa fa-trash" aria-hidden="true"></i>'; else echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</a></td></tr>';
 			}
