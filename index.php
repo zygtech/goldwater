@@ -40,7 +40,7 @@
 </html>
 <?php } else {
 ?>
-<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/jobs.php"> 
+<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/tasks.php"> 
 <?php
 }
 ?>
