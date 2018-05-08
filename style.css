@@ -1,7 +1,7 @@
 body { background: white; font-family: 'Titillium Web', sans-serif; font-size: 14px; box-sizing: border-box; margin: 10px 0; color: #58585a;}
 .container { width: 800px; margin: auto; }
 .ribbon { background: lightgray; padding: 10px 0; }
-.main { min-height: 400px; padding: 40px 0; }
+.main { min-height: 440px; padding: 40px 0; }
 .logout { font-size: 14px; font-weight: normal; }
 #box { width: 400px; margin: auto; text-align: center; padding: 5px; }
 a { color: #58585a; text-decoration: none; }

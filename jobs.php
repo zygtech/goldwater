@@ -26,7 +26,9 @@
 		{
 			$.ajax('jobswitch.php?id='+id+'&priority='+sel.value);	
 		}
-				$(function(){
+		$(function(){
+			$('.pages').hide();
+			$('.p1').show();
 			$('.confirm').click(function(event){
 				event.preventDefault();
 				$.confirm({
@@ -75,10 +77,15 @@
 		?>
 		<tr><th style="width: 7%"><a href="jobs.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">JOB ID</a></th><th style="width: 20%;"><a href="jobs.php?sort=company<?php if ($_GET['sort']=='company' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CLIENT</a></th><th style="width: 30%;"><a href="jobs.php?sort=name<?php if ($_GET['sort']=='name' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">JOB NAME</a></th><th style="width: 15%;"><a href="jobs.php?sort=required<?php if ($_GET['sort']=='required' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">REQUIRED BY</a></th><th style="width: 15%;"><a href="jobs.php?sort=stage<?php if ($_GET['sort']=='stage' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">STAGE</a></th><th><a href="jobs.php?sort=priority<?php if ($_GET['sort']=='priority' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">PRI</a></th><th></th><th></th></tr>
 		<?php
+		$p=1; $l=0;
 		while ($row = mysqli_fetch_array($result)) {
+			if ($l==10) {
+				$l=0;
+				$p++;
+			}
 			if ($row['archive']==1 && $_GET['archive']!='true') $archivecolor=' style="background: #eeee99 !important;"'; else $archivecolor='';
 			if ($_GET['q']=='' || strpos(strtolower('JB' . sprintf('%04d',$row['id'])), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['company']), strtolower($_GET['q']))!==false || strpos(strtolower($row['fullname']), strtolower($_GET['q']))!==false) {				
-				echo '<tr' .  $archivecolor . '><td style="width: 7%;">JB' . sprintf('%04d',$row['id']) . '</td><td style="width: 20%;">';
+				echo '<tr' .  $archivecolor . ' class="pages p' . $p . '"><td style="width: 7%;">JB' . sprintf('%04d',$row['id']) . '</td><td style="width: 20%;">';
 				if ($row['company']!='') echo $row['company']; else echo $row['fullname'];
 				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td style="width: 30%;">' . $row['name'] . '</td><td style="width: 15%;">' . $row['required'] . '</td><td id="F' . $row['id'] . '" style="width: 15%;">';
 				if ($row['archive']==0) {?>
@@ -111,12 +118,19 @@
 				echo '</center></td><td><center><a class="confirm" href="jobdel.php?id=' . $row['id'] . '">';
 				if ($row['archive']==1) echo '<i class="fa fa-trash" aria-hidden="true"></i>'; else echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</a></center></td></tr>';
+				$l++;
 			}
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
 	?>
-	</table><br />
+	</table><br /><center>	
+	<?php 
+	if ($p>1) 
+		for ($n=1;$n<=$p;$n++) {
+			?><a style="cursor: pointer;" onclick="$('.pages').hide(); $('.p<?php echo $n; ?>').show();"><?php echo $n; ?></a>&nbsp;<?php
+		}
+	?></center><br />
 	<center><?php if ($_GET['archive']!='true') echo '<a href="jobs.php?archive=true">Archive</a>'; else echo '<a href="jobs.php">Back</a>'; ?></center>
 	</div></div>
 	<div class="ribbon"><div class="container">

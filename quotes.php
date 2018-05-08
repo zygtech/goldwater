@@ -19,6 +19,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 	<script>
 		$(function(){
+			$('.pages').hide();
+			$('.p1').show();
 			$('.confirm').click(function(event){
 				event.preventDefault();
 				$.confirm({
@@ -65,17 +67,29 @@
 		?>
 			<tr><th style="width: 20%;"><a href="quotes.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">QUOTE ID</a></th><th style="width: 30%;"><a href="quotes.php?sort=name<?php if ($_GET['sort']=='name' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">QUOTE NAME</a></th><th style="width: 18%;"><a href="quotes.php?sort=added<?php if ($_GET['sort']=='added' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">BY</a></th><th style="width: 23%;"><a href="quotes.php?sort=company<?php if ($_GET['sort']=='company' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CLIENT</a></th><th></th><th></th></tr>
 		<?php
+		$p=1; $l=0;
 		while ($row = mysqli_fetch_array($result)) {
+			if ($l==10) {
+				$l=0;
+				$p++;
+			}
 			if ($_GET['q']=='' || strpos(strtolower('QTE' . sprintf('%04d',$row['id'])), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['company']), strtolower($_GET['q']))!==false || strpos(strtolower($row['fullname']), strtolower($_GET['q']))!==false) {				
 				echo '<tr><td style="width: 20%;">QTE' . sprintf('%04d',$row['id']) . '</td><td style="width: 30%;">' . $row['name'] . '</td><td style="width: 18%;">' . $row['added'] . '</td><td style="width: 23%;">';
 				if ($row['company']!='') echo $row['company']; else echo $row['fullname'];
 				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a href="quotepdf.php?id=' . $row['id'] . '"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></td><td><a href="quote.php?id=' . $row['id'] . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a class="confirm" href="quotedel.php?id=' . $row['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>';
+				$l++;
 			}
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
 	?>
-	</table>
+	</table><br /><center>	
+	<?php 
+	if ($p>1) 
+		for ($n=1;$n<=$p;$n++) {
+			?><a style="cursor: pointer;" onclick="$('.pages').hide(); $('.p<?php echo $n; ?>').show();"><?php echo $n; ?></a>&nbsp;<?php
+		}
+	?></center><br />
 	</div></div>
 	<div class="ribbon"><div class="container">
 	<?php require_once('menu.php'); ?>
