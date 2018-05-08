@@ -15,7 +15,7 @@ select { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
 table { width: 100%; }
 td { font-size: 14px; }
 .data tr:nth-child(even) { background: #e7e7e8; }
-.data td { height: 30px; }
+.data td { height: 32px; }
 .data td a { background: #58585a; padding: 2px 4px; border-radius: 5px; color: #e7e7e8; }
 button { border: none; color: #58585a; background: none; cursor: pointer; }
 .data { border-spacing: 0; }

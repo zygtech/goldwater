@@ -87,7 +87,7 @@
 			if ($_GET['q']=='' || strpos(strtolower('JB' . sprintf('%04d',$row['id'])), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['company']), strtolower($_GET['q']))!==false || strpos(strtolower($row['fullname']), strtolower($_GET['q']))!==false) {				
 				echo '<tr' .  $archivecolor . ' class="pages p' . $p . '"><td style="width: 7%;">JB' . sprintf('%04d',$row['id']) . '</td><td style="width: 20%;">';
 				if ($row['company']!='') echo $row['company']; else echo $row['fullname'];
-				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td style="width: 30%;">' . $row['name'] . '</td><td style="width: 15%;">' . $row['required'] . '</td><td id="F' . $row['id'] . '" style="width: 15%;">';
+				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;" title="Client edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td style="width: 30%;">' . $row['name'] . '</td><td style="width: 15%;">' . $row['required'] . '</td><td id="F' . $row['id'] . '" style="width: 15%;">';
 				if ($row['archive']==0) {?>
 				<select onchange="stage(this,<?php echo $row['id']; ?>);">
 					<option <?php if ($row['stage']=='1-Proposal') echo 'selected'; ?>>1-Proposal</option>
@@ -110,12 +110,12 @@
 					<option <?php if ($row['priority']=='3') echo 'selected'; ?>>3</option>
 				</select>
 				<?php
-				echo '</td><td><center><a href="task.php?id=' . $row['id'] . '"><i class="fa fa-tasks" aria-hidden="true"></i></a></center></td><td><center>';
+				echo '</td><td><center><a href="task.php?id=' . $row['id'] . '" title="Add tasks"><i class="fa fa-tasks" aria-hidden="true"></i></a></center></td><td><center>';
 				if ($row['archive']==0)
-					echo '<a href="job.php?id=' . $row['id'] . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+					echo '<a href="job.php?id=' . $row['id'] . '" title="Job edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
 				else
-					echo '<a href="jobedit.php?id=' . $row['id'] . '"><i class="fa fa-undo" aria-hidden="true"></i></a>';				
-				echo '</center></td><td><center><a class="confirm" href="jobdel.php?id=' . $row['id'] . '">';
+					echo '<a href="jobedit.php?id=' . $row['id'] . '" title="Job revive"><i class="fa fa-undo" aria-hidden="true"></i></a>';				
+				echo '</center></td><td><center><a class="confirm" href="jobdel.php?id=' . $row['id'] . '" title="Job delete">';
 				if ($row['archive']==1) echo '<i class="fa fa-trash" aria-hidden="true"></i>'; else echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</a></center></td></tr>';
 				$l++;
@@ -123,6 +123,8 @@
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
+		for ($n=$l;$n<10;$n++) 
+			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	?>
 	</table><br /><center>	
 	<?php 

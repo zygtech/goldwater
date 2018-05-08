@@ -106,12 +106,14 @@
 					<option <?php if ($row['priority']=='3') echo 'selected'; ?>>3</option>
 				</select>
 				<?php
-				echo '</td><td><center><a href="client.php?id=' . $row['id'] . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></center></td><td><center><a class="confirm" href="clientdel.php?id=' . $row['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></a></center></td></tr>';  
+				echo '</td><td><center><a href="client.php?id=' . $row['id'] . '" title="Client edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></center></td><td><center><a class="confirm" href="clientdel.php?id=' . $row['id'] . '" title="Client delete"><i class="fa fa-trash" aria-hidden="true"></i></a></center></td></tr>';  
 				$l++;
 			}			
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
+		for ($n=$l;$n<10;$n++) 
+			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	?>
 	</table><br /><center>	
 	<?php 

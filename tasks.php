@@ -79,8 +79,8 @@
 				if ($row['archive']==0)
 					echo '<td style="width: 6%; text-align: right;">';
 				else
-					echo '<td style="width: 6%; text-align: right;"><a href="taskedit.php?id=' . $row['id'] . '&job=' . $row['jobid'] . '&return=s"><i class="fa fa-undo" aria-hidden="true"></i></a>';	
-				echo ' <a class="confirm" href="taskdel.php?id=' . $row['id'] . '&job=' . $row['jobid'] . '&return=s">';
+					echo '<td style="width: 6%; text-align: right;"><a href="taskedit.php?id=' . $row['id'] . '&job=' . $row['jobid'] . '&return=s" title="Task revive"><i class="fa fa-undo" aria-hidden="true"></i></a>';	
+				echo ' <a class="confirm" href="taskdel.php?id=' . $row['id'] . '&job=' . $row['jobid'] . '&return=s" title="Task tick/delete">';
 				if ($row['archive']==1) echo '<i class="fa fa-trash" aria-hidden="true"></i>'; else echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</a></td></tr>';
 			$l++;
@@ -88,6 +88,8 @@
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
+		for ($n=$l;$n<10;$n++) 
+			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	?>
 	</table><br /><center>	
 	<?php 
