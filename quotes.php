@@ -19,8 +19,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 	<script>
 		$(function(){
-			$('.pages').hide();
-			$('.p1').show();
 			$('.confirm').click(function(event){
 				event.preventDefault();
 				$.confirm({

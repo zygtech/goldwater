@@ -34,8 +34,6 @@
                 $('.emails').prop('checked', false);
         }
         $(function(){
-			$('.pages').hide();
-			$('.p1').show();
 			$('.confirm').click(function(event){
 				event.preventDefault();
 				$.confirm({

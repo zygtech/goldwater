@@ -27,8 +27,6 @@
 			$.ajax('jobswitch.php?id='+id+'&priority='+sel.value);	
 		}
 		$(function(){
-			$('.pages').hide();
-			$('.p1').show();
 			$('.confirm').click(function(event){
 				event.preventDefault();
 				$.confirm({
