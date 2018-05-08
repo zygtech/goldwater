@@ -13,6 +13,31 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C300%2C900%7CPT+Sans%3A700&#038;subset=latin" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+	<script>
+		$(function(){
+			$('.confirm').click(function(event){
+				event.preventDefault();
+				$.confirm({
+					title     : 'Confirm',
+					content   : 'Are you sure?',
+					buttons   : {
+						'Yes'   : {
+							action: function(){
+								window.location = $(event.currentTarget).attr('href');
+							}
+
+						},
+						'No'   : {
+							action: function(){} 
+						}
+					}
+				});		
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -34,17 +59,20 @@
 		if ($_GET['archive']=='true') $archive='1'; else $archive='0';
 		if ($_GET['q']=='') $archivequery=' AND `tasks`.archive=' . $archive; else $archivequery='';
 		if ($_GET['order']=='DESC') $order=' DESC';
-		if ($_GET['sort']=='')
-			$result = mysqli_query($link,'SELECT `tasks`.id,`tasks`.job,`tasks`.name,`tasks`.archive,`tasks`.added FROM `tasks` WHERE `tasks`.job=' . $_GET['id'] . $archivequery . ' ORDER BY id;');
-		else
-			$result = mysqli_query($link,'SELECT `tasks`.id,`tasks`.job,`tasks`.name,`tasks`.archive,`tasks`.added FROM `tasks` WHERE `tasks`.job=' . $_GET['id'] . $archivequery . ' ORDER BY ' . $_GET['sort'] . $order . ';');
+		$result = mysqli_query($link,'SELECT `tasks`.id,`tasks`.job,`tasks`.name,`tasks`.archive,`tasks`.added FROM `tasks` WHERE `tasks`.job=' . $_GET['id'] . $archivequery . ' ORDER BY id DESC;');
+
 		?>
 		<tr><th style="width: 64%;">TASK</th><th style="width: 30%;">USER</th><th></th></tr>
 		<?php
+		$p=1; $l=0;
 		while ($row = mysqli_fetch_array($result)) {
+			if ($l==10) {
+				$l=0;
+				$p++;
+			}
 			if ($row['archive']==1 && $_GET['archive']!='true') $archivecolor=' style="background: #eeee99 !important;"'; else $archivecolor='';
 			if ($_GET['q']=='' || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false) {				
-				echo '<tr' .  $archivecolor . '><td style="width: 64%;">' . $row['name'] . '</td><td style="width: 30%;">' . $row['added'] . '</td>';
+				echo '<tr' .  $archivecolor . ' class="pages p' . $p . '"><td style="width: 64%;">' . $row['name'] . '</td><td style="width: 30%;">' . $row['added'] . '</td>';
 				if ($row['archive']==0)
 					echo '<td style="width: 6%; text-align: right;">';
 				else
@@ -55,11 +83,13 @@
 			}
 		}
 		mysqli_free_result($result);
+		for ($n=$l;$n<10;$n++) 
+			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	if ($_GET['archive']!='true' && $_GET['q']=='') {
 	?>
 	<form action="taskedit.php" method="post">
 	<input type="hidden" name="job" value="<?php echo $_GET['id']; ?>" />
-	<tr><td style="border-top: 2px solid white; background: white;"><input type="text" name="name" maxlength="50" value="" style="width: 100%;" /></td><td style="border-top: 2px solid white; background: white;"><select name="user">
+	<tr style="display: table-row;"><td style="border-top: 2px solid white; background: white;"><input type="text" name="name" maxlength="50" value="" style="width: 100%;" /></td><td style="border-top: 2px solid white; background: white;"><select name="user">
 	<?php
 	$result = mysqli_query($link,'SELECT * FROM users;');
 	while ($row = mysqli_fetch_array($result)) {
@@ -70,7 +100,13 @@
 	</select></td><td style="border-top: 2px solid white; background: white;"><center><input type="submit" value="+"</center></td></tr>
 	</form>
 	<?php } ?>
-	</table><br />
+	</table><br /><center>	
+	<?php 
+	if ($p>1) 
+		for ($n=1;$n<=$p;$n++) {
+			?><a style="cursor: pointer;" onclick="$('.pages').hide(); $('.p<?php echo $n; ?>').show();"><?php echo $n; ?></a>&nbsp;<?php
+		}
+	?></center><br />
 	<center><?php if ($_GET['archive']!='true') echo '<a href="task.php?archive=true&id=' . $_GET['id'] . '">Archive</a>'; else echo '<a href="task.php?id=' . $_GET['id'] . '">Back</a>'; ?></center>
 	</div></div>
 	<div class="ribbon"><div class="container">
