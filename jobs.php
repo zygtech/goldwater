@@ -115,7 +115,7 @@
 					echo '<a href="job.php?id=' . $row['id'] . '" title="Job edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
 				else
 					echo '<a href="jobedit.php?id=' . $row['id'] . '" title="Job revive"><i class="fa fa-undo" aria-hidden="true"></i></a>';				
-				echo '</center></td><td><center><a class="confirm" href="jobdel.php?id=' . $row['id'] . '" title="Job delete">';
+				echo '</center></td><td><center><a class="confirm" href="jobdel.php?id=' . $row['id'] . '" title="Job tick/delete">';
 				if ($row['archive']==1) echo '<i class="fa fa-trash" aria-hidden="true"></i>'; else echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</a></center></td></tr>';
 				$l++;
