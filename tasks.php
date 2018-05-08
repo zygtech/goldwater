@@ -57,11 +57,7 @@
 	<?php
 		if ($_GET['archive']=='true') $archive='1'; else $archive='0';
 		if ($_GET['q']=='') $archivequery=' AND `tasks`.archive=' . $archive; else $archivequery='';
-		if ($_GET['order']=='DESC') $order=' DESC';
-		if ($_GET['sort']=='')
-			$result = mysqli_query($link,'SELECT `tasks`.id,`tasks`.job,`tasks`.name,`tasks`.archive,`tasks`.added,`jobs`.id AS jobid,`jobs`.name AS jobname FROM `tasks` INNER JOIN `jobs` ON `jobs`.id=`tasks`.job WHERE `tasks`.added="' . $_SESSION['login'] . '"' . $archivequery . ' ORDER BY id;');
-		else
-			$result = mysqli_query($link,'SELECT `tasks`.id,`tasks`.job,`tasks`.name,`tasks`.archive,`tasks`.added,`jobs`.id AS jobid,`jobs`.name AS jobname FROM `tasks` INNER JOIN `jobs` ON `jobs`.id=`tasks`.job WHERE `tasks`.added="' . $_SESSION['login'] . '"' . $archivequery . ' ORDER BY ' . $_GET['sort'] . $order . ';');
+		$result = mysqli_query($link,'SELECT `tasks`.id,`tasks`.job,`tasks`.name,`tasks`.archive,`tasks`.added,`jobs`.id AS jobid,`jobs`.name AS jobname FROM `tasks` INNER JOIN `jobs` ON `jobs`.id=`tasks`.job WHERE `tasks`.added="' . $_SESSION['login'] . '"' . $archivequery . ' ORDER BY id DESC;');
 		?>
 		<tr><th style="width: 24%;">JOB</th><th style="width: 70%;">TASK</th><th></th></tr>
 		<?php
