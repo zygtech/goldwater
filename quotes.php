@@ -74,7 +74,7 @@
 				$p++;
 			}
 			if ($_GET['q']=='' || strpos(strtolower('QTE' . sprintf('%04d',$row['id'])), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['company']), strtolower($_GET['q']))!==false || strpos(strtolower($row['fullname']), strtolower($_GET['q']))!==false) {				
-				echo '<tr><td style="width: 20%;">QTE' . sprintf('%04d',$row['id']) . '</td><td style="width: 30%;">' . $row['name'] . '</td><td style="width: 18%;">' . $row['added'] . '</td><td style="width: 23%;">';
+				echo '<tr class="pages p' . $p . '"><td style="width: 20%;">QTE' . sprintf('%04d',$row['id']) . '</td><td style="width: 30%;">' . $row['name'] . '</td><td style="width: 18%;">' . $row['added'] . '</td><td style="width: 23%;">';
 				if ($row['company']!='') echo $row['company']; else echo $row['fullname'];
 				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;" title="Client edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a href="quotepdf.php?id=' . $row['id'] . '" title="Quote save"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></td><td><a href="quote.php?id=' . $row['id'] . '" title="Quote edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a class="confirm" href="quotedel.php?id=' . $row['id'] . '" title="Quote delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>';
 				$l++;

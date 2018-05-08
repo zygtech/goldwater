@@ -75,7 +75,7 @@
 			}
 			if ($row['archive']==1 && $_GET['archive']!='true') $archivecolor=' style="background: #eeee99 !important;"'; else $archivecolor='';
 			if ($_GET['q']=='' || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false) {				
-				echo '<tr' .  $archivecolor . '><td style="width: 24%;">' . $row['jobname'] . '</td><td style="width: 70%;">' . $row['name'] . '</td>';
+				echo '<tr' .  $archivecolor . ' class="pages p' . $p . '"><td style="width: 24%;">' . $row['jobname'] . '</td><td style="width: 70%;">' . $row['name'] . '</td>';
 				if ($row['archive']==0)
 					echo '<td style="width: 6%; text-align: right;">';
 				else

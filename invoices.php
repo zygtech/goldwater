@@ -74,7 +74,7 @@
 				$p++;
 			}
 			if ($_GET['q']=='' || strpos(strtolower('INV' . sprintf('%04d',$row['id'])), strtolower($_GET['q']))!==false || strpos(strtolower($row['company']), strtolower($_GET['q']))!==false || strpos(strtolower($row['fullname']), strtolower($_GET['q']))!==false || strpos(strtolower($row['total']), strtolower($_GET['q']))!==false) {				
-				echo '<tr><td style="width: 20%;">INV' . sprintf('%04d',$row['id']) . '</td><td style="width: 30%;">';
+				echo '<tr class="pages p' . $p . '"><td style="width: 20%;">INV' . sprintf('%04d',$row['id']) . '</td><td style="width: 30%;">';
 				if ($row['company']!='') echo $row['company']; else echo $row['fullname'];
 				echo ' <a href="client.php?id=' . $row['client'] . '" style="background: none; color: #58585a;" title="Client edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td style="width: 20%;">' . $row['added'] . '</td><td style="width: 20%;">£' . $row['total'] . '</td>';
 				echo '<td><a href="invoicepdf.php?id=' . $row['id'] . '" title="Invoice save"><i class="fa fa-floppy-o" aria-hidden="true"></i></a></td><td><a href="invoice.php?id=' . $row['id'] . '" title="Invoice edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a class="confirm" href="invoicedel.php?id=' . $row['id'] . '" title="Invoice delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>';
