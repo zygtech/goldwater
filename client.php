@@ -1,6 +1,6 @@
 <?php
 /*
- * bez nazwy.php
+ * client.php
  * 
  * Copyright 2018 Krzysztof Hrybacz <krzysztof@zygtech.pl>
  * 
