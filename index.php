@@ -1,6 +1,6 @@
 <?php
 /*
- * bez nazwy.php
+ * index.php
  * 
  * Copyright 2018 Krzysztof Hrybacz <krzysztof@zygtech.pl>
  * 
