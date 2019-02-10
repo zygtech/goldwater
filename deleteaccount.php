@@ -26,7 +26,7 @@
 <?php
 require_once('config.php');
 session_start();
-if ($_GET['confirm']=='yes' && $_SESSION['company']!='goldwater') {
+if ($_GET['confirm']=='yes') {
 	$link = mysqli_connect($sql, $sqluser, $sqlpass, $sqldb);
 	mysqli_set_charset($link,'utf8');
 	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_info`;');
