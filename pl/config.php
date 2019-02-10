@@ -24,11 +24,10 @@
 
 ?>
 <?php
-	error_reporting(0);
 	//System settings
-	$url='https://your.zygtech.pl';
+	$url='https://yourdomain.com';
 	$sql='localhost';
-	$sqluser='yourinvoice';
-	$sqlpass='yourinvoice';
-	$sqldb='yourinvoice';
+	$sqluser='user';
+	$sqlpass='password';
+	$sqldb='database';
 ?>
