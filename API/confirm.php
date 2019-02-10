@@ -1,6 +1,6 @@
 <?php
 /*
- * tasks.php
+ * confirm.php
  * 
  * Copyright 2018 Krzysztof Hrybacz <krzysztof@zygtech.pl>
  * 
