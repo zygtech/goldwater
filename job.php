@@ -33,7 +33,7 @@
 	<form action="jobedit.php" method="POST">
 	<input type="hidden" name="id" value="<?php echo $job['id']; ?>" />
 	<table>
-	<tr><td>Job ID:<br /><div class="field"><?php if ($job['id']!='') echo 'JB' . sprintf('%04d',$job['id']); ?>&nbsp;</div></td>
+	<tr><td>Job ID:<br /><div class="field"><?php if ($job['id']!='') echo 'JB' . sprintf('%04d',$job['id']); else echo 'AUTO'; ?></div></td>
 	<td>Date of creation:<br /><div class="field"><?php if ($job['creation']!='') echo $job['creation']; else echo date('Y-m-d'); ?>&nbsp;</div></td></tr>
 	<?php
 	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` WHERE id=' . $job['client'] . ';');
