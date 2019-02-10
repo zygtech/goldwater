@@ -1,6 +1,6 @@
 <?php
 /*
- * tasks.php
+ * info.php
  * 
  * Copyright 2018 Krzysztof Hrybacz <krzysztof@zygtech.pl>
  * 
