@@ -1,0 +1,48 @@
+body { background: white; font-family: 'Titillium Web', sans-serif; font-size: 14px; box-sizing: border-box; margin: 0; color: #58585a; }
+img { max-height: 200px; }
+a { color: #58585a; text-decoration: none; }
+h1 { margin-bottom: 12px; }
+.logout { font-size: 12px; font-weight: normal; }
+table { width: 100%; }
+td, form { font-size: 14px; text-align: center; }
+.data tr { display: none; }
+.data tr.p1 { display: table-row; }
+.data tr:nth-child(1) { display: table-row; }
+.data tr:nth-child(even) { background: #e7e7e8; }
+.data td, .data th { height: 32px; padding: 0 5px; text-align: left; }
+.data { border-spacing: 0; }
+th { text-align: left; }
+#box { width: 640px; margin: auto; text-align: left; }
+h1 { padding: 0; margin: 0; }
+.container h1 { padding: 12px 0; }
+.field,input,textarea,select { background: white; border: none; border-radius: 5px; padding: 5px; margin: auto; font-family: 'Titillium Web', sans-serif; color: #58585a; } 
+.field,input[type=text],input[type=number],input[type=password],input[type=submit],input[type=file],input[type=date],textarea,select { width: 95%; background: lightgray; }
+.field { width: 95%; }
+textarea { height: 110px; resize: none; font-size: 14px; color: #58585a; }
+input[type=text].desc { width: 90%; text-align: center; }
+div.field { width: 90%; }
+tr.row { display: none; }
+select { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+button { border: none; color: #58585a; background: none; cursor: pointer; }
+.right { float: right; padding: 8px 0; }
+.worklink { color: gray; }
+#ribbon { width: 100%; height: 50px; background: lightgray; } 
+#ribbon .in { padding: 0px 30px; width: 1024px; margin: 0 auto; }
+#ribbon .in .left { float: left; display: inline-flex; padding: 5px 0; }
+#ribbon .in .right { float: right; display: inline-flex; }
+#ribbon .in .text { margin: 5px; float: left; }
+#ribbon .in img { max-height: 30px; margin: 5px 8px; float: left; }
+#ribbon .in input { width: 200px; margin: 5px 0 5px 10px; padding: 3px 5px; float: left; border: none; border-radius: 5px; background: #ffffff; }
+#ribbon .in button { margin: 8px 0; background: none; border: none; }
+.ribbonlogin { background: lightgray; padding: 10px 0; }
+.container { width: 1024px; margin: auto; }
+.mainlogin { min-height: 30px; padding: 40px 0; }
+#main { width: 1024px; margin: 0 auto; box-sizing: border-box; }
+#main .left { width: 200px; float: left; }
+#main .left #zlecenia { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
+#main .left #klienci { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
+#main .left #faktury { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
+#main .left #noty { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
+#main .right { width: 800px; margin: 25px 0 25px 10px; padding: 0; border-radius: 10px; float: left; height: 550px; overflow-y: auto; }
+#ribbon .in .right img { margin-top: 1px; }
+.tools a { font-size: 22px; margin: 0 5px; }
