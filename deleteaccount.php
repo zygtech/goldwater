@@ -45,7 +45,7 @@ if ($_GET['confirm']=='yes') {
 		mysqli_query($link,$query);
 		$query = 'DROP TABLE `' . $_SESSION['company'] . '_info`;';
 		mysqli_query($link,$query);
-		unlink('./' . $_SESSION['company'] . '.png');
+		unlink('./logo/' . $_SESSION['company'] . '.png');
 	};
 	mysqli_close($link);
 ?>
