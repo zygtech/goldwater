@@ -37,7 +37,7 @@
 		if ($_GET['sort']=='')
 			$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_jobs`.id,`' . $_SESSION['company'] . '_jobs`.name,`' . $_SESSION['company'] . '_jobs`.client,`' . $_SESSION['company'] . '_jobs`.required,`' . $_SESSION['company'] . '_jobs`.stage,`' . $_SESSION['company'] . '_jobs`.finished,`' . $_SESSION['company'] . '_jobs`.priority,`' . $_SESSION['company'] . '_jobs`.archive,`' . $_SESSION['company'] . '_clients`.fullname,`' . $_SESSION['company'] . '_clients`.company FROM `' . $_SESSION['company'] . '_jobs` INNER JOIN `' . $_SESSION['company'] . '_clients` ON `' . $_SESSION['company'] . '_jobs`.client = `' . $_SESSION['company'] . '_clients`.id' . $archivequery . ' ORDER BY id;');
 		else
-			$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_jobs`.id,`' . $_SESSION['company'] . '_jobs`.name,`' . $_SESSION['company'] . '_jobs`.client,`' . $_SESSION['company'] . '_jobs`.required,`' . $_SESSION['company'] . '_jobs`.stage,`' . $_SESSION['company'] . '_jobs`.finished,`' . $_SESSION['company'] . '_jobs`.priority,`' . $_SESSION['company'] . '_jobs`.archive,`' . $_SESSION['company'] . '_clients`.fullname,`' . $_SESSION['company'] . '_clients`.company FROM `' . $_SESSION['company'] . '_jobs` INNER JOIN `' . $_SESSION['company'] . '_clients` ON `' . $_SESSION['company'] . '_jobs`.client = `' . $_SESSION['company'] . '_clients`.id' . $archivequery . ' ORDER BY ' . $_GET['sort'] . ',id'. $order . ';');
+			$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_jobs`.id,`' . $_SESSION['company'] . '_jobs`.name,`' . $_SESSION['company'] . '_jobs`.client,`' . $_SESSION['company'] . '_jobs`.required,`' . $_SESSION['company'] . '_jobs`.stage,`' . $_SESSION['company'] . '_jobs`.finished,`' . $_SESSION['company'] . '_jobs`.priority,`' . $_SESSION['company'] . '_jobs`.archive,`' . $_SESSION['company'] . '_clients`.fullname,`' . $_SESSION['company'] . '_clients`.company FROM `' . $_SESSION['company'] . '_jobs` INNER JOIN `' . $_SESSION['company'] . '_clients` ON `' . $_SESSION['company'] . '_jobs`.client = `' . $_SESSION['company'] . '_clients`.id' . $archivequery . ' ORDER BY ' . $_GET['sort'] . $order . ',id;');
 		?>
 		<tr><th style="width: 7%"><a href="jobs.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">ID</a></th><th style="width: 20%;"><a href="jobs.php?sort=company<?php if ($_GET['sort']=='company' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">KLIENT</a></th><th style="width: 30%;"><a href="jobs.php?sort=name<?php if ($_GET['sort']=='name' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">NAZWA ZLECENIA</a></th><th style="width: 15%;"><a href="jobs.php?sort=required<?php if ($_GET['sort']=='required' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">TERMIN</a></th><th style="width: 15%;"><a href="jobs.php?sort=stage<?php if ($_GET['sort']=='stage' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">ETAP</a></th><th><a href="jobs.php?sort=priority<?php if ($_GET['sort']=='priority' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">PRI</a></th><th></th><th></th></tr>
 		<?php
@@ -74,7 +74,7 @@
 					<option <?php if ($row['priority']=='3') echo 'selected'; ?>>3</option>
 				</select>
 				<?php
-				echo '</td><td><center><a href="task.php?id=' . $row['id'] . '" title="Dodaj zadania"><i class="fa fa-tasks" aria-hidden="true"></i></a></center></td><td><center>';
+				echo '</td><td><center><a href="task.php?id=' . $row['id'] . '" title="Dodaj zadania"><i class="fa fa-tasks" aria-hidden="true"></i></a></center></td><td><a href="jobpdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Obejrzyj info"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="jobsave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Zapisz info"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><center>';
 				if ($row['archive']==0)
 					echo '<a href="job.php?id=' . $row['id'] . '" title="Edytuj zlecenie"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
 				else
@@ -88,7 +88,7 @@
 		mysqli_free_result($result);
 		mysqli_close($link);
 		for ($n=$l;$n<10;$n++) 
-			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	?>
 	</table><br /><center>	
 	<?php 
