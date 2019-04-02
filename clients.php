@@ -37,7 +37,7 @@
 		if ($_GET['sort']=='') 
 			$result = mysqli_query($link,'SELECT id,fullname,company,mobile,priority,category,mail FROM `' . $_SESSION['company'] . '_clients` ORDER BY id;');
 		else
-			$result = mysqli_query($link,'SELECT id,fullname,company,mobile,priority,category,mail FROM `' . $_SESSION['company'] . '_clients` ORDER BY ' . $_GET['sort'] . ',id'. $order . ';');
+			$result = mysqli_query($link,'SELECT id,fullname,company,mobile,priority,category,mail FROM `' . $_SESSION['company'] . '_clients` ORDER BY ' . $_GET['sort'] . $order . ',id;');
 		?>
         <form action="mailform.php" method="POST">
 		<tr><th><input type="checkbox" class="all" name="all" onclick="checkall();" /></th><th style="width: 10%;"><a href="clients.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CLIENT ID</a></th><th style="width: 20%;"><a href="clients.php?sort=company<?php if ($_GET['sort']=='company' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">COMPANY</a></th><th style="width: 25%;"><a href="clients.php?sort=fullname<?php if ($_GET['sort']=='fullname' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">FULL NAME</a></th><th style="width: 20%;"><a href="clients.php?sort=mobile<?php if ($_GET['sort']=='mobile' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">MOBILE</a></th><th><a href="clients.php?sort=category<?php if ($_GET['sort']=='category' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CATEGORY</a></th><th><a href="clients.php?sort=priority<?php if ($_GET['sort']=='priority' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">PRI</a></th><th></th><th></th></tr>
@@ -65,14 +65,14 @@
 					<option <?php if ($row['priority']=='3') echo 'selected'; ?>>3</option>
 				</select>
 				<?php
-				echo '</td><td><center><a href="client.php?id=' . $row['id'] . '" title="Client edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></center></td><td><center><a class="confirm" href="clientdel.php?id=' . $row['id'] . '" title="Client delete"><i class="fa fa-trash" aria-hidden="true"></i></a></center></td></tr>';  
+				echo '</td><td><a href="clientpdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Client view"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="clientsave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Client save"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><center><a href="client.php?id=' . $row['id'] . '" title="Client edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></center></td><td><center><a class="confirm" href="clientdel.php?id=' . $row['id'] . '" title="Client delete"><i class="fa fa-trash" aria-hidden="true"></i></a></center></td></tr>';  
 				$l++;
 			}			
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
 		for ($n=$l;$n<10;$n++) 
-			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	?>
 	</table><br />
 	<center>	
