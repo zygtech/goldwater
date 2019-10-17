@@ -53,6 +53,7 @@
 				echo ' <a class="confirm" href="taskdel.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '" title="Zakończ/Usuń zadanie">';
 				if ($row['archive']==1) echo '<i class="fa fa-trash" aria-hidden="true"></i>'; else echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</a></td></tr>';
+				$l++
 			}
 		}
 		mysqli_free_result($result);

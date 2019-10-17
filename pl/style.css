@@ -46,3 +46,5 @@ button { border: none; color: #58585a; background: none; cursor: pointer; }
 #main .right { width: 800px; margin: 25px 0 25px 10px; padding: 0; border-radius: 10px; float: left; height: 550px; overflow-y: auto; }
 #ribbon .in .right img { margin-top: 1px; }
 .tools a { font-size: 22px; margin: 0 5px; }
+.pages { display: none; }
+.p1 { display: table-row; }
