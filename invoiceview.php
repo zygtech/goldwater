@@ -58,7 +58,7 @@
 		if ($line!='') $html .= $i . '<br />';
     }
     $html .= '</td><td>' . nl2br($row['description']) . '</td>
-	<td style="height: 100mm;">' . nl2br($row['type']) . '</td><td class="right">';
+	<td style="height: 70mm;">' . nl2br($row['type']) . '</td><td class="right">';
 	foreach(preg_split('~[\n]+~', $row['netto']) as $line){
 		if ($line==0) $html .= '<br />'; else $html .= number_format($line,2) . '<br />'; 
 	} 
@@ -73,7 +73,7 @@
 		if ($line==0) $vat[$n] = 0; else $vat[$n] = $line; 
 		$n++;
 	} 
-	for($i=0;$i<20;$i++) {
+	for($i=0;$i<15;$i++) {
 		if ($netto[$i]==0) {
 			$vatvalue .= '<br />';
 			$total .= '<br />';
@@ -85,12 +85,13 @@
 		}
 	}
 	$html .= '<td class="right">' . $vatvalue . '</td><td class="right">' . $total . '</td></tr></table>
+	<table class="main"><tr><th style="background: ' . $info['color'] . ';">Additional information</td></tr><tr><td style="height: 20mm;">' . $row['info'] . '</td></tr></table>
 	<table class="top"><tr><td></td><td></td><td></td><td></td><td style="background: ' . $info['color'] . '; color: #ffffff;">TOTAL</td><td class="right" style="background: #e7e7e8;">';
 	if ($row['currency']=='USD') $html .= '$'; if ($row['currency']=='EUR') $html .= '€'; if ($row['currency']=='GBP') $html .= '£';
 	$html .= number_format($row['total'],2);
 	if ($row['currency']=='PLN') $html .= ' zł';
 	$html .= '</td></tr></table>
-	<div id="footer" style="text-align: center;">' . $row['info'] . '<br />
+	<div id="footer" style="text-align: center;">
     This document is original electronic version.
 	</div>
 	</div>
