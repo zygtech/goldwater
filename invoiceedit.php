@@ -43,7 +43,7 @@
 	$netto="";
 	$vat="";
 	$total=0;
-	for ($i=0;$i<15$i++) {
+	for ($i=0;$i<15;$i++) {
 		$description.=$_POST['description' . $i] . "\n";
 		$type.=$_POST['type' . $i] . "\n";
 		$netto.=$_POST['netto' . $i] . "\n";
