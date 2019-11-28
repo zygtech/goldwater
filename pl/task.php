@@ -35,7 +35,7 @@
 		$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_tasks`.id,`' . $_SESSION['company'] . '_tasks`.job,`' . $_SESSION['company'] . '_tasks`.name,`' . $_SESSION['company'] . '_tasks`.archive,`' . $_SESSION['company'] . '_tasks`.added FROM `' . $_SESSION['company'] . '_tasks` WHERE `' . $_SESSION['company'] . '_tasks`.job=' . $_GET['id'] . $archivequery . ' ORDER BY id DESC;');
 
 		?>
-		<tr><th style="width: 64%;">ZADANIE</th><th style="width: 30%;">UŻYTKOWNIK</th><th></th></tr>
+		<tr><th style="width: 62%;">ZADANIE</th><th style="width: 30%;">UŻYTKOWNIK</th><th></th></tr>
 		<?php
 		$p=1; $l=0;
 		while ($row = mysqli_fetch_array($result)) {
@@ -49,11 +49,11 @@
 				if ($row['archive']==0)
 					echo '<td style="width: 3%;"></td><td style="width: 3%;">';
 				else
-					echo '<td style="width: 3%;"><a href="taskedit.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '" title="Odnów zadanie"><i class="fa fa-undo" aria-hidden="true"></i></a></td><td style="width: 3%;">';	
-				echo ' <a class="confirm" href="taskdel.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '" title="Zakończ/Usuń zadanie">';
+					echo '<td style="width: 3%;"><a href="taskedit.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '" title="Task revive"><i class="fa fa-undo" aria-hidden="true"></i></a></td><td style="width: 3%;">';	
+				echo ' <a class="confirm" href="taskdel.php?id=' . $row['id'] . '&job=' . $_GET['id'] . '" title="Task tick/delete">';
 				if ($row['archive']==1) echo '<i class="fa fa-trash" aria-hidden="true"></i>'; else echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</a></td></tr>';
-				$l++
+				$l++;
 			}
 		}
 		mysqli_free_result($result);
@@ -63,7 +63,7 @@
 	?>
 	<form action="taskedit.php" method="post">
 	<input type="hidden" name="job" value="<?php echo $_GET['id']; ?>" />
-	<tr style="display: table-row;"><td style="border-top: 2px solid white; background: white;"><input type="text" name="name" maxlength="50" value="" style="width: 100%;" /></td><td style="border-top: 2px solid white; background: white;  text-align: center;"><select name="user">
+	<tr style="display: table-row;"><td style="border-top: 2px solid white; background: white;"><input type="text" name="name" maxlength="50" value="" /></td><td style="border-top: 2px solid white; background: white;  text-align: center;"><select name="user">
 	<?php
 	$result = mysqli_query($link,'SELECT * FROM ' . $_SESSION['company'] . '_users;');
 	while ($row = mysqli_fetch_array($result)) {
