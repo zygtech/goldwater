@@ -17,7 +17,7 @@
 		margin-bottom: 2mm;
 		border-spacing: 0;
 	}
-	img.logo { margin-bottom: 12mm; max-height: 200px; }
+	img.logo { margin-bottom: 12mm; max-height: 150px; }
 	td, th { font-size: 13px; text-align: left; }
 	.top td { width: 16.66%; color: #58585a; text-align: center; padding: 8px 15px; }
 	.main th { font-weight: normal; text-align: left; color: #58585a; padding: 8px 15px; color: #ffffff; }
