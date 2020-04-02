@@ -1,6 +1,6 @@
 <?php
 /*
- * config.php
+ * jobdel.php
  * 
  * Copyright 2018 Krzysztof Hrybacz <krzysztof@zygtech.pl>
  * 
@@ -24,10 +24,17 @@
 
 ?>
 <?php
-	//System settings
-	$url='https://your.zygtech.pl';
-	$sql='localhost';
-	$sqluser='yourinvoice';
-	$sqlpass='yourinvoice';
-	$sqldb='yourinvoice';
+	require_once('config.php');
+	session_start();
+	$link = mysqli_connect($sql, $sqluser, $sqlpass, $sqldb);
+	mysqli_set_charset($link,'utf8');
+	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_products` WHERE id=' . $_GET['id'] . ';');
+	$archive = mysqli_fetch_array($result)['archive'];
+	if ($_SESSION['login']!='' && $_GET['id']!='' && $archive==1) {
+		mysqli_query($link,'DELETE FROM `' . $_SESSION['company'] . '_products` WHERE id=' . $_GET['id'] . ';');
+	} elseif ($_SESSION['login']!='' && $_GET['id']!='')
+		mysqli_query($link,'UPDATE `' . $_SESSION['company'] . '_products` SET archive=1 WHERE id=' . $_GET['id'] . ';');
+	mysqli_free_result($result);
+	mysqli_close($link);
 ?>
+<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/products.php"> 

@@ -37,7 +37,7 @@
 		<?php
 		$p=1; $l=0;
 		while ($row = mysqli_fetch_array($result)) {
-			if ($l==10) {
+			if ($l==15) {
 				$l=0;
 				$p++;
 			}
@@ -56,7 +56,7 @@
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
-		for ($n=$l;$n<10;$n++) 
+		for ($n=$l;$n<15;$n++) 
 			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	?>
 	</table><br /><center>	

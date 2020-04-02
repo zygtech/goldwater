@@ -45,7 +45,7 @@
 	</table>
 	<table class="main"><tr><th style="background: ' . $info['color'] . ';">Dane płatnika:</th><th style="background: ' . $info['color'] . ';"></th><th style="background: ' . $info['color'] . ';"></th></tr>
 	<tr><td>' . nl2br($row['clientinfo']);
-	if ($client['nip']!='') $html .= 'NIP: ' . $client['nip'];
+	if ($client['nip']!='') $html .= '<br />NIP: ' . $client['nip'];
 	$html .=  '</td><td><strong>';
 	if ($client['mail']!='' || $client['mobile']!='') $html .= 'KONTAKT:';
 	$html .= '</strong><br />' . $client['mail'] . '<br />' . $client['mobile'] . '</td>
@@ -81,13 +81,18 @@
 		} else {
 			$tmp = $netto[$i]*$vat[$i]/100;
 			$vatvalue .= number_format($tmp,2) . '<br />';
+			$podatek += $tmp;
 			$tmp = $netto[$i]+$tmp;
 			$total .= number_format($tmp,2) . '<br />';
 		}
 	}
 	$html .= '<td class="right">' . $vatvalue . '</td><td class="right">' . $total . '</td></tr></table>
 	<table class="main"><tr><th style="background: ' . $info['color'] . ';">Dodatkowe informacje</td></tr><tr><td style="height: 20mm;">' . $row['info'] . '</td></tr></table>
-	<table class="top"><tr><td></td><td></td><td></td><td></td><td style="background: ' . $info['color'] . '; color: #ffffff;">RAZEM</td><td class="right" style="background: #e7e7e8;">';
+	<table class="top"><tr><td></td><td></td><td style="background: ' . $info['color'] . '; color: #ffffff;">PODATEK</td><td style="background: #e7e7e8;">';
+	if ($row['currency']=='USD') $html .= '$'; if ($row['currency']=='EUR') $html .= '€'; if ($row['currency']=='GBP') $html .= '£';
+	$html .= number_format($podatek,2);
+	if ($row['currency']=='PLN') $html .= ' zł';
+	$html .='</td><td style="background: ' . $info['color'] . '; color: #ffffff;">DO ZAPŁATY</td><td class="right" style="background: #e7e7e8;">';
 	if ($row['currency']=='USD') $html .= '$'; if ($row['currency']=='EUR') $html .= '€'; if ($row['currency']=='GBP') $html .= '£';
 	$html .= number_format($row['total'],2);
 	if ($row['currency']=='PLN') $html .= ' zł';

@@ -40,7 +40,7 @@
 	<?php
 	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` WHERE id=' . $invoice['client'] . ';');
 	$client = mysqli_fetch_array($result);
-	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` ORDER BY company,fullname;;');
+	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` ORDER BY company,fullname;');
 	?>
 	<tr><td>Firma:<br />
 	<input type="text" name="clientname" list="clients" onchange="phone(this);" value="<?php 
@@ -67,20 +67,28 @@
 	</table><?php
 	$description = explode("\n", $invoice['description']);
 	$type = explode("\n", $invoice['type']);
-	$netto = explode("\n", $invoice['netto']);
+	$brutto = explode("\n", $invoice['brutto']);
 	$vat = explode("\n", $invoice['vat']);
 	?>
 	<table><tr><td style="width: 5% !important;">Lp.</td><td style="width: 40% !important;">Opis</td><td style="width: 15% !important;">Rodzaj</td>
-	<td style="width: 10% !important;">Netto</td><td style="width: 10% !important;">VAT (%)</td><td style="width: 10% !important;">Wartość VAT</td><td style="width: 10% !important;">Wartość łączna</td></tr>
+	<td style="width: 10% !important;">Brutto</td><td style="width: 10% !important;">VAT (%)</td><td style="width: 10% !important;">VAT</td><td style="width: 10% !important;">Netto</td></tr>
 	<?php for($i=0;$i<15;$i++) {
-	?><tr id="row<?php echo $i; ?>" class="row" style="<?php if ($i==0 || $description[$i-1]!='') echo 'display: table-row;'; ?>"><td style="width: 5% !important;"><div id="lp<?php echo $i; ?>" class="field"><?php if ($description[$i]!='') echo $i+1; else echo '&nbsp;'; ?></div><td style="width: 40% !important;"><input class="desc" type="text" name="description<?php echo $i; ?>" maxlength="37" onchange="additem(this,<?php echo $i; ?>)" value="<?php echo $description[$i]; ?>" /></td><td style="width: 15% !important;"><input class="desc" id="type<?php echo $i; ?>" <?php if ($description[$i]=='') echo 'disabled="disabled"'; ?> type="text" name="type<?php echo $i; ?>" list="types" maxlength="10" value="<?php echo $type[$i]; ?>" /><datalist id="types"><option>Product</option><option>Service</option></datalist></td>
-	<td style="width: 10% !important;"><input class="desc" type="text" name="netto<?php echo $i; ?>" id="netto<?php echo $i; ?>" <?php if ($description[$i]=='') echo 'disabled="disabled"'; ?> maxlength="9" onchange="calcvat(this,<?php echo $i; ?>);" value="<?php if ($netto[$i]!=0) echo number_format($netto[$i],2,'.',''); ?>" /></td><td style="width: 10% !important;"><input class="desc" type="text" name="vat<?php echo $i; ?>" id="vat<?php echo $i; ?>" <?php if ($description[$i]=='') echo 'disabled="disabled"'; ?> maxlength="2" onchange="calcvat(this,<?php echo $i; ?>);" value="<?php if ($vat[$i]!=0) echo $vat[$i]; ?>" /></td><td style="width: 10% !important;"><div id="vatvalue<?php echo $i; ?>" class="field"><?php if ($netto[$i]!=0) echo number_format($netto[$i]*$vat[$i]/100,2,'.',''); else echo '&nbsp;'; ?></div></td><td style="width: 10% !important;"><div id="total<?php echo $i; ?>" class="field"><?php if ($netto[$i]!=0) echo number_format($netto[$i]+$netto[$i]*$vat[$i]/100,2,'.',''); else echo '&nbsp;'; ?></div></td></tr>
+	?><tr id="row<?php echo $i; ?>" class="row" style="<?php if ($i==0 || $description[$i-1]!='') echo 'display: table-row;'; ?>"><td style="width: 5% !important;"><div id="lp<?php echo $i; ?>" class="field"><?php if ($description[$i]!='') echo $i+1; else echo '&nbsp;'; ?></div><td style="width: 40% !important;"><input class="desc" type="text" list="products" name="description<?php echo $i; ?>" maxlength="37" onchange="additem(this,<?php echo $i; ?>)" value="<?php echo $description[$i]; ?>" />
+	<datalist id="products">
+	<?php
+		if ($invoice['currency']!='') $currency=$invoice['currency']; else $currency=$info['currency'];
+		$result = mysqli_query($link,'SELECT id,name,price,vat,sku FROM `' . $_SESSION['company'] . '_products` WHERE archive=0 ORDER BY id;');
+		while ($product = mysqli_fetch_array($result)) 
+			echo '<option>' . $product['name'] . ' : ' . $product['price'] . $currency . ' : ' . $product['vat'] . '% VAT : ' . $product['sku'] . '</option>';
+	?>
+	</datalist>
+	</td><td style="width: 15% !important;"><input class="desc" id="type<?php echo $i; ?>" <?php if ($description[$i]=='') echo 'disabled="disabled"'; ?> type="text" name="type<?php echo $i; ?>" list="types" maxlength="10" value="<?php echo $type[$i]; ?>" /><datalist id="types"><option>Service</option><option>Product</option></datalist></td>
+	<td style="width: 10% !important;"><input class="desc" type="text" name="brutto<?php echo $i; ?>" id="brutto<?php echo $i; ?>" <?php if ($description[$i]=='') echo 'disabled="disabled"'; ?> maxlength="9" onchange="calcvat(this,<?php echo $i; ?>);" value="<?php if ($brutto[$i]!=0) echo number_format($brutto[$i],2,'.',''); ?>" /></td><td style="width: 10% !important;"><input class="desc" type="text" name="vat<?php echo $i; ?>" id="vat<?php echo $i; ?>" <?php if ($description[$i]=='') echo 'disabled="disabled"'; ?> maxlength="2" onchange="calcvat(this,<?php echo $i; ?>);" value="<?php if ($vat[$i]!=0) echo $vat[$i]; ?>" /></td><td style="width: 10% !important;"><div id="vatvalue<?php echo $i; ?>" class="field"><?php if ($brutto[$i]!=0) echo number_format(($brutto[$i]*100/(100+$vat[$i])),2,'.',''); else echo '&nbsp;'; ?></div></td><td style="width: 10% !important;"><div id="netto<?php echo $i; ?>" class="field"><?php if ($brutto[$i]!=0) echo number_format(($brutto[$i]-($brutto[$i]*100/(100+$vat[$i]))),2,'.',''); else echo '&nbsp;'; ?></div></td></tr>
 	<?php } ?>
 	</table>
 	<table><tr><th>Bank</th><th>Waluta</th></tr>
-	<tr><td rowspan="3"><textarea style="width: 90%;" name="bank" id="bank" onkeyup="limitTextarea(this,5,50)"><?php if ($invoice['bank']=='') echo $info['bank']; else echo $invoice['bank']; ?></textarea></td>
+	<tr><td rowspan="3"><textarea style="width: 90%;" name="bank" id="bank" onkeyup="limitTextarea(this,3,50)"><?php if ($invoice['bank']=='') echo $info['bank']; else echo $invoice['bank']; ?></textarea></td>
 	<td><select class="desc" name="currency" id="currency">
-	<?php if ($invoice['currency']!='') $currency=$invoice['currency']; else $currency=$info['currency']; ?>
 	<option <?php if ($currency=='USD') echo 'selected'; ?>>USD</option>
 	<option <?php if ($currency=='EUR') echo 'selected'; ?>>EUR</option>
 	<option <?php if ($currency=='GBP') echo 'selected'; ?>>GBP</option>
