@@ -31,12 +31,16 @@
 	$result = mysqli_query($link,'SELECT * FROM `' . $_POST['company'] . '_users` WHERE name="' . $login . '";');
 	$check = mysqli_fetch_array($result);
 	$result = mysqli_query($link,'SELECT * FROM `' . $_POST['company'] . '_info`;');
-	$display=mysqli_fetch_array($result)['display'];
+	$row=mysqli_fetch_array($result);
+	$display=$row['display'];
+	$productlist=$row['productlist'];
 	if ($check['pass']==md5($_POST['pass'])) {
 	session_start();
 	$_SESSION['login']=$login;
 	$_SESSION['company']=$_POST['company'];
 	$_SESSION['display']=$display;
+	$_SESSION['products']=$productlist;
+?>
 ?>
 	<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/tasks.php"> 
 <?php

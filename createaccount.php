@@ -52,7 +52,7 @@
   `clientinfo` text NOT NULL,
   `description` text NOT NULL,
   `type` text NOT NULL,
-  `netto` text NOT NULL,
+  `brutto` text NOT NULL,
   `total` float NOT NULL,
   `creation` date NOT NULL,
   `added` varchar(20) NOT NULL,
@@ -99,6 +99,19 @@
   `archive` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
 		mysqli_query($link,$query);
+		$query = 'CREATE TABLE `' . $_POST['company'] . '_products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `price` float NOT NULL,
+  `vat` int(11) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `sku` varchar(50) NOT NULL,
+  `creation` date NOT NULL,
+  `added` varchar(20) NOT NULL,
+  `archive` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+		mysqli_query($link,$query);
 		$query = 'CREATE TABLE `' . $_POST['company'] . '_users` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
@@ -115,10 +128,11 @@
   `contact` varchar(255) NOT NULL,
   `bank` varchar(255) NOT NULL,
   `color` varchar(10) NOT NULL,
-  `currency` varchar(3) NOT NULL
+  `currency` varchar(3) NOT NULL,
+  `productlist` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
 		mysqli_query($link,$query);
-		$query = 'INSERT INTO `' . $_POST['company'] . '_info` VALUES (1,"' . $_POST['display'] . '","' . $_POST['address'] . '","' . $_POST['contact'] . '","' . $_POST['bank'] . '","' . $_POST['color'] . '","' . $_POST['currency'] . '");';
+		$query = 'INSERT INTO `' . $_POST['company'] . '_info` VALUES (1,"' . $_POST['display'] . '","' . $_POST['address'] . '","' . $_POST['contact'] . '","' . $_POST['bank'] . '","' . $_POST['color'] . '","' . $_POST['currency'] . '",' . $_POST['products'] . ');';
 		mysqli_query($link,$query);
 		move_uploaded_file($_FILES['logo']['tmp_name'], './logo/' . $_POST['company'] . '.png');
 	};

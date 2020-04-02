@@ -53,6 +53,7 @@
 <table>
 <tr><td>COMPANY LOGIN*:</td><td><input type="text" name="company" pattern="[A-Za-z0-9\S]{1,20}" minlength="5"/></td></tr>
 <tr><td>DISPLAY NAME*:</td><td><input type="text" name="display" /></td></tr>
+<tr><td>PRODUCT CATALOG:</td><td><input name="products" type="checkbox" value="1" checked /> (uncheck for services only)</td></tr>
 <tr><td>LOGIN*:</td><td><input type="text" name="login" pattern="[A-Za-z0-9\S]{1,20}" /></td></tr>
 <tr><td>PASSWORD*:</td><td><input type="password" name="pass" /></td></tr>
 <tr><td>E-MAIL*:</td><td><input type="text" name="mail" /></td></tr>
@@ -61,7 +62,7 @@
 <tr><td>COLOR*:</td><td><input type="color" name="color" value="#555555" /></td></tr>
 <tr><td>ADDRESS:</td><td><textarea name="address" onkeyup="limitTextarea(this,5,50)"></textarea></td></tr>
 <tr><td>CONTACT:</td><td><textarea name="contact" onkeyup="limitTextarea(this,2,50)"></textarea></td></tr>
-<tr><td>BANK INFO:</td><td><textarea name="bank" onkeyup="limitTextarea(this,5,50)"></textarea></td></tr>
+<tr><td>BANK INFO:</td><td><textarea name="bank" onkeyup="limitTextarea(this,3,50)"></textarea></td></tr>
 <tr><td></td><td><input type="submit" value="CREATE AN ACCOUNT" /></td></tr>
 <tr><td></td><td>* required fields</td></tr>
 </table>

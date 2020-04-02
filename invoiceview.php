@@ -45,27 +45,12 @@
 	</table>
 	<table class="main"><tr><th style="background: ' . $info['color'] . ';">Payer Name:</th><th style="background: ' . $info['color'] . ';"></th><th style="background: ' . $info['color'] . ';"></th></tr>
 	<tr><td>' . nl2br($row['clientinfo']);
-	if ($client['nip']!='') $html .= 'TIN: ' . $client['nip'];
+	if ($client['nip']!='') $html .= '<br />TIN: ' . $client['nip'];
 	$html .=  '</td><td><strong>';
 	if ($client['mail']!='' || $client['mobile']!='') $html .= 'CONTACT:';
-	$html .= '</strong><br />' . $client['mail'] . '<br />' . $client['mobile'] . '</td>
-	<td style="width: 45%;"></td>
-	</table>
-	<table class="main description"><tr><th style="background: ' . $info['color'] . '; width: 5%;">No.</th><th style="background: ' . $info['color'] . '; width: 40%;">Description</th><th style="background: ' . $info['color'] . '; width: 15%;">Type</th><th style="background: ' . $info['color'] . '; width: 10%;">Netto</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT (%)</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT value</th><th style="background: ' . $info['color'] . '; width: 10%;">Total</th></tr>
-	<tr><td style="text-align: center;">';
-	foreach(preg_split('~[\n]+~', $row['description']) as $line){
-		$i++;
-		if ($line!='') $html .= $i . '<br />';
-    }
-    $html .= '</td><td>' . nl2br($row['description']) . '</td>
-	<td style="height: 70mm;">' . nl2br($row['type']) . '</td><td class="right">';
-	foreach(preg_split('~[\n]+~', $row['netto']) as $line){
-		if ($line==0) $html .= '<br />'; else $html .= number_format($line,2) . '<br />'; 
-	} 
-	$html .= '</td><td>' . nl2br($row['vat']) . '</td>';
 	$n=0;
-	foreach(preg_split('~[\n]+~', $row['netto']) as $line){
-		if ($line==0) $netto[$n] = 0; else $netto[$n] = $line; 
+	foreach(preg_split('~[\n]+~', $row['brutto']) as $line){
+		if ($line==0) $brutto[$n] = 0; else $brutto[$n] = $line; 
 		$n++;
 	} 
 	$n=0;
@@ -74,19 +59,35 @@
 		$n++;
 	} 
 	for($i=0;$i<15;$i++) {
-		if ($netto[$i]==0) {
+		if ($brutto[$i]==0) {
 			$vatvalue .= '<br />';
-			$total .= '<br />';
+			$netto .= '<br />';
 		} else {
-			$tmp = $netto[$i]*$vat[$i]/100;
+			$tmp = $brutto[$i]-($brutto[$i]*100/(100+$vat[$i]));
 			$vatvalue .= number_format($tmp,2) . '<br />';
-			$tmp = $netto[$i]+$tmp;
-			$total .= number_format($tmp,2) . '<br />';
+			$podatek += $tmp;
+			$tmp = $brutto[$i]-$tmp;
+			$netto .= number_format($tmp,2,'.','') . '<br />';
 		}
 	}
-	$html .= '<td class="right">' . $vatvalue . '</td><td class="right">' . $total . '</td></tr></table>
+	$html .= '</strong><br />' . $client['mail'] . '<br />' . $client['mobile'] . '</td>
+	<td style="width: 45%;"></td>
+	</table>
+	<table class="main description"><tr><th style="background: ' . $info['color'] . '; width: 5%;">No.</th><th style="background: ' . $info['color'] . '; width: 40%;">Description</th><th style="background: ' . $info['color'] . '; width: 15%;">Type</th><th style="background: ' . $info['color'] . '; width: 10%;">Netto</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT (%)</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT value</th><th style="background: ' . $info['color'] . '; width: 10%;">Brutto</th></tr>
+	<tr><td style="text-align: center;">';
+	foreach(preg_split('~[\n]+~', $row['description']) as $line){
+		$i++;
+		if ($line!='') $html .= $i . '<br />';
+    }
+    $html .= '</td><td>' . nl2br($row['description']) . '</td>
+	<td style="height: 70mm;">' . nl2br($row['type']) . '</td><td class="right">' . $netto . '</td><td>' . nl2br($row['vat']) . '</td>';
+	$html .= '<td class="right">' . $vatvalue . '</td><td class="right">' . $row['brutto'] . '</td></tr></table>
 	<table class="main"><tr><th style="background: ' . $info['color'] . ';">Additional information</td></tr><tr><td style="height: 20mm;">' . $row['info'] . '</td></tr></table>
-	<table class="top"><tr><td></td><td></td><td></td><td></td><td style="background: ' . $info['color'] . '; color: #ffffff;">TOTAL</td><td class="right" style="background: #e7e7e8;">';
+	<table class="top"><tr><td></td><td></td><td style="background: ' . $info['color'] . '; color: #ffffff;">TAX</td><td style="background: #e7e7e8;">';
+	if ($row['currency']=='USD') $html .= '$'; if ($row['currency']=='EUR') $html .= '€'; if ($row['currency']=='GBP') $html .= '£';
+	$html .= number_format($podatek,2);
+	if ($row['currency']=='PLN') $html .= ' zł';
+	$html .='</td><td style="background: ' . $info['color'] . '; color: #ffffff;">TOTAL</td><td class="right" style="background: #e7e7e8;">';
 	if ($row['currency']=='USD') $html .= '$'; if ($row['currency']=='EUR') $html .= '€'; if ($row['currency']=='GBP') $html .= '£';
 	$html .= number_format($row['total'],2);
 	if ($row['currency']=='PLN') $html .= ' zł';

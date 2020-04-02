@@ -37,23 +37,23 @@
 	}
 	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` WHERE id=' . $clientid . ';');
 	$client = mysqli_fetch_array($result);
-	if ($client['company']!='') $clientinfo = $client['company'] . "\n";
-	if ($client['fullname']!='') $clientinfo .= $client['fullname'] . "\n";
-	if ($client['address']!='') $clientinfo .= $client['address'] . "\n";
-	$netto="";
+	if ($client['company']!='') $clientinfo = $client['company'];
+	if ($client['fullname']!='') $clientinfo .= "\n" . $client['fullname'];
+	if ($client['address']!='') $clientinfo .= "\n" . $client['address'];
+	$brutto="";
 	$vat="";
 	$total=0;
 	for ($i=0;$i<15;$i++) {
 		$description.=$_POST['description' . $i] . "\n";
 		$type.=$_POST['type' . $i] . "\n";
-		$netto.=$_POST['netto' . $i] . "\n";
+		$brutto.=$_POST['brutto' . $i] . "\n";
 		$vat.=$_POST['vat' . $i] . "\n";
-		$total=number_format($total+$_POST['netto' . $i]+$_POST['netto' . $i]*$_POST['vat' . $i]/100,2,'.','');
+		$total=number_format($total+$_POST['brutto' . $i],2,'.','');
 	}
 	if ($_SESSION['login']!='' && $_POST['id']=='' && $clientid!='')
-		mysqli_query($link,'INSERT INTO `' . $_SESSION['company'] . '_invoices` VALUES (0,' . $clientid . ',"' . strip_tags($clientinfo) . '","' . strip_tags($description) . '","' . strip_tags($type) . '","' . strip_tags($netto) . '","' . $total . '",NOW(),"' . $_SESSION['login'] . '","' . strip_tags($vat) . '","' . strip_tags($_POST['invoiceid']) . '","' . strip_tags($_POST['bank']) . '","' . strip_tags($_POST['currency']) . '","' . strip_tags($_POST['info']) . '");');
+		mysqli_query($link,'INSERT INTO `' . $_SESSION['company'] . '_invoices` VALUES (0,' . $clientid . ',"' . strip_tags($clientinfo) . '","' . strip_tags($description) . '","' . strip_tags($type) . '","' . strip_tags($brutto) . '","' . $total . '",NOW(),"' . $_SESSION['login'] . '","' . strip_tags($vat) . '","' . strip_tags($_POST['invoiceid']) . '","' . strip_tags($_POST['bank']) . '","' . strip_tags($_POST['currency']) . '","' . strip_tags($_POST['info']) . '");');
 	elseif ($_SESSION['login']!='' && $clientid!='')
-		mysqli_query($link,'UPDATE `' . $_SESSION['company'] . '_invoices` SET client=' . $clientid . ', clientinfo="' . strip_tags($clientinfo) . '", description="' . strip_tags($description) . '", type="' . strip_tags($type) . '", netto="' . strip_tags($netto) . '", total="' . $total . '", vat="' . strip_tags($vat) . '", invoiceid="' . strip_tags($_POST['invoiceid']) . '", bank="' . strip_tags($_POST['bank']) . '", currency="' . strip_tags($_POST['currency']) . '", info="' . strip_tags($_POST['info']) . '" WHERE id=' . $_POST['id'] . ';');
+		mysqli_query($link,'UPDATE `' . $_SESSION['company'] . '_invoices` SET client=' . $clientid . ', clientinfo="' . strip_tags($clientinfo) . '", description="' . strip_tags($description) . '", type="' . strip_tags($type) . '", brutto="' . strip_tags($brutto) . '", total="' . $total . '", vat="' . strip_tags($vat) . '", invoiceid="' . strip_tags($_POST['invoiceid']) . '", bank="' . strip_tags($_POST['bank']) . '", currency="' . strip_tags($_POST['currency']) . '", info="' . strip_tags($_POST['info']) . '" WHERE id=' . $_POST['id'] . ';');
 	mysqli_free_result($result);
 	mysqli_close($link);
 ?>

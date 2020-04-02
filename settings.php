@@ -47,13 +47,14 @@
 <table>
 <tr><td>COMPANY LOGIN:</td><td><?php echo $_SESSION['company']; ?></td></tr>
 <tr><td>DISPLAY NAME:</td><td><input type="text" name="display" value="<?php echo $info['display']; ?>" /></td></tr>
+<tr><td>PRODUCT CATALOG:</td><td><input name="products" type="checkbox" value="1" <?php if ($info['productlist']==1) echo 'checked'; ?> /> (uncheck for services only)</td></tr>
 <tr><td>CURRENCY:</td><td><select name="currency"><option <?php if ($info['currency']=='USD') echo 'selected'; ?>>USD</option><option <?php if ($info['currency']=='EUR') echo 'selected'; ?>>EUR</option><option <?php if ($info['currency']=='GBP') echo 'selected'; ?>>GBP</option><option <?php if ($info['currency']=='PLN') echo 'selected'; ?>>PLN</option></select></td></tr>
 <tr><td>LOGO:</td><td><img src="logo/<?php echo $_SESSION['company']; ?>.png" width="100" /></td></tr>
 <tr><td>CHANGE:</td><td><input type="file" name="logo" /></td></tr>
 <tr><td>COLOR:</td><td><input type="color" name="color" value="<?php echo $info['color']; ?>"/></td></tr>
 <tr><td>ADDRESS:</td><td><textarea name="address" onkeyup="limitTextarea(this,5,50)"><?php echo $info['address']; ?></textarea></td></tr>
 <tr><td>CONTACT:</td><td><textarea name="contact" onkeyup="limitTextarea(this,2,50)"><?php echo $info['contact']; ?></textarea></td></tr>
-<tr><td>BANK INFO:</td><td><textarea name="bank" onkeyup="limitTextarea(this,5,50)"><?php echo $info['bank']; ?></textarea></td></tr>
+<tr><td>BANK INFO:</td><td><textarea name="bank" onkeyup="limitTextarea(this,3,50)"><?php echo $info['bank']; ?></textarea></td></tr>
 <tr><td></td><td><input type="submit" value="SAVE SETTINGS" /></td></tr>
 <tr><td></td><td><a href="deleteaccount.php">DELETE ACCOUNT</a></td></tr>
 </table>

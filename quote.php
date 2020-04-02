@@ -38,7 +38,7 @@
 	<?php
 $result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` WHERE id=' . $quote['client'] . ';');
 	$client = mysqli_fetch_array($result);
-	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` ORDER BY company,fullname;;');
+	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_clients` ORDER BY company,fullname;');
 	?>
 	<tr><td>Company:<br />
 	<input type="text" name="clientname" list="clients" onchange="phone(this);" value="<?php 

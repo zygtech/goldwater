@@ -18,9 +18,9 @@ h1 { padding: 0; margin: 0; }
 .field,input,textarea,select { background: white; border: none; border-radius: 5px; padding: 5px; margin: auto; font-family: 'Titillium Web', sans-serif; color: #58585a; } 
 .field,input[type=text],input[type=number],input[type=password],input[type=submit],input[type=file],input[type=date],textarea,select { width: 95%; background: lightgray; }
 .field { width: 95%; }
+div.field { width: 90%; }
 textarea { height: 110px; resize: none; font-size: 14px; color: #58585a; }
 input[type=text].desc { width: 90%; text-align: center; }
-div.field { width: 90%; }
 tr.row { display: none; }
 select { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
 button { border: none; color: #58585a; background: none; cursor: pointer; }
@@ -43,7 +43,8 @@ button { border: none; color: #58585a; background: none; cursor: pointer; }
 #main .left #klienci { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
 #main .left #faktury { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
 #main .left #noty { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
-#main .right { width: 800px; margin: 25px 0 25px 10px; padding: 0; border-radius: 10px; float: left; height: 550px; overflow-y: auto; }
+#main .left #produkty { background: lightgray; margin: 25px 0; padding: 11px; border-radius: 10px; }
+#main .right { width: 800px; margin: 25px 0 25px 10px; padding: 0; border-radius: 10px; float: left; }
 #ribbon .in .right img { margin-top: 1px; }
 .tools a { font-size: 22px; margin: 0 5px; }
 .pages { display: none; }
