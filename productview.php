@@ -52,7 +52,7 @@
 	<tr><th style="background: ' . $info['color'] . ';">Price</th></tr>
 	<tr><td style="text-align: center;">' . number_format($row['price'],2,'.',',') . '</td></tr>';
 	if ($row['vat']!='') $html .= '
-	<tr><th style="background: ' . $info['color'] . ';">Vat</th></tr>
+	<tr><th style="background: ' . $info['color'] . ';">VAT</th></tr>
 	<tr><td style="text-align: center;">' . $row['vat'] . '</td></tr>';
 	if ($row['category']!='') $html .= '
 	<tr><th style="background: ' . $info['color'] . ';">Category</th></tr>
