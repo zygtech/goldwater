@@ -29,6 +29,7 @@
 	<h1 style="float: left;">Products
 	</h1>
 	<span style="float: right;"><a href="product.php"><i class="fa fa-plus" aria-hidden="true"></i> Add a product</a></span><br /><br />
+	
 	<table class="data">
 	<?php
 		$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_info`;');
@@ -79,7 +80,8 @@
 		for ($n=1;$n<=$p;$n++) {
 			?><a style="cursor: pointer;" onclick="$('.pages').hide(); $('.p<?php echo $n; ?>').show();"><?php echo $n; ?></a>&nbsp;<?php
 		}
-	?></center><br />
+	?></center>
+	<span><a href="export.php">Export to CSV</a></span><br />
 	<center><?php if ($_GET['archive']!='true') echo '<a href="products.php?archive=true">Archive</a>'; else echo '<a href="products.php">Back</a>'; ?></center>
 <?php
 	require('template_end.php');
