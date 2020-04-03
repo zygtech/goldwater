@@ -56,7 +56,7 @@
 		function additem(sel,id)
 		{
 			if (sel.value!='') {
-				$('#lp'+id).html(parseInt(id)+1);
+				$('#lp'+id).val(parseInt(id)+1);
 				$('#type'+id).prop('disabled', false);
 				$('#brutto'+id).prop('disabled', false);
 				$('#vat'+id).prop('disabled', false);
@@ -64,7 +64,7 @@
 				$('#row'+idn).show();
 			}
 			else
-				$('#lp'+id).html('&nbsp;');
+				$('#lp'+id).val('');
 			var tmp = sel.value;
 			$('#type'+id).val('Service');
 			$("#products").find("option").each(function() {
