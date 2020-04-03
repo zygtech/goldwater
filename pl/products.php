@@ -57,7 +57,7 @@
 				if ($info['currency']=='USD') echo '$'; if ($info['currency']=='EUR') echo '€'; if ($info['currency']=='GBP') echo '£';
 				echo number_format($row['price'],2,'.','');
 				if ($info['currency']=='PLN') echo ' zł';
-				echo '</td><td><a href="productpdf.php?id=' . $row['id'] . '" title="Podgląd produktu"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="productsave.php?id=' . $row['id'] . '" title="Zapisz produkt"><i class="fa fa-save" aria-hidden="true"></i></a></td><td>';
+				echo '</td><td><a href="productpdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Podgląd produktu"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="productsave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Zapisz produkt"><i class="fa fa-save" aria-hidden="true"></i></a></td><td>';
 				if ($row['archive']==0) 
 					echo '<a href="product.php?id=' . $row['id'] . '" title="Edytuj produkt"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
 				else
