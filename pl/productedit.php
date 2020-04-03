@@ -28,13 +28,19 @@
 	session_start();
 	$link = mysqli_connect($sql, $sqluser, $sqlpass, $sqldb);
 	mysqli_set_charset($link,'utf8');
-	if ($_POST['id']=='') 
+	if ($_POST['id']=='') {
 		mysqli_query($link,'INSERT INTO `' . $_SESSION['company'] . '_products` VALUES (0,"' . strip_tags($_POST['name']) . '",' . $_POST['price'] . ',' . $_POST['vat'] . ',"' . strip_tags($_POST['category']) . '","' . strip_tags($_POST['description']) . '","' . strip_tags($_POST['sku']) . '",NOW(),"' . strip_tags($_POST['added']) . '",' . $_POST['archive'] . ');');
-	elseif (strip_tags($_POST['name'])!='')
+		$id = mysqli_insert_id($link);
+	}
+	elseif (strip_tags($_POST['name'])!='') {
 		mysqli_query($link,'UPDATE `' . $_SESSION['company'] . '_products` SET name="' . strip_tags($_POST['name']) . '", price=' . $_POST['price'] . ', vat=' . $_POST['vat'] . ', category="' . strip_tags($_POST['category']) . '", description="' . strip_tags($_POST['description']) . '", sku="' . strip_tags($_POST['sku']) . '", archive=' . strip_tags($_POST['archive']) . ' WHERE id=' . $_POST['id'] . ';');
+		$id = $_POST['id'];
+	}
 	if ($_GET['id']!='' && $_SESSION['login']!='')
 		mysqli_query($link,'UPDATE `' . $_SESSION['company'] . '_products` SET archive=0 WHERE id=' . $_GET['id'] . ';');
 	mysqli_free_result($result);
 	mysqli_close($link);
+	if ($_FILES['photo']['tmp_name']!='' && !file_exists('../products/' . 'PR' . sprintf('%04d',$id)))
+		move_uploaded_file($_FILES['photo']['tmp_name'],'../products/' . 'PR' . sprintf('%04d',$id));
 ?>
 <meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/products.php">

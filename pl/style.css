@@ -49,3 +49,6 @@ button { border: none; color: #58585a; background: none; cursor: pointer; }
 .tools a { font-size: 22px; margin: 0 5px; }
 .pages { display: none; }
 .p1 { display: table-row; }
+input[type=file] { width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1; }
+label { cursor: pointer; }
+#product { max-width: 500px; max-height: 500px; }
