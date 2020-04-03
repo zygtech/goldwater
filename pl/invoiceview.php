@@ -73,7 +73,7 @@
 	$html .= '</strong><br />' . $client['mail'] . '<br />' . $client['mobile'] . '</td>
 	<td style="width: 45%;"></td>
 	</table>
-	<table class="main description"><tr><th style="background: ' . $info['color'] . '; width: 6%;">Lp.</th><th style="background: ' . $info['color'] . '; width: 35%;">Opis</th><th style="background: ' . $info['color'] . '; width: 15%;">Typ</th><th style="background: ' . $info['color'] . '; width: 13%;">Netto</th><th style="background: ' . $info['color'] . '; width: 8%;">%</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT</th><th style="background: ' . $info['color'] . '; width: 13%;">Brutto</th></tr>
+	<table class="main description"><tr><th style="background: ' . $info['color'] . '; width: 7%;">Lp.</th><th style="background: ' . $info['color'] . '; width: 33%;">Opis</th><th style="background: ' . $info['color'] . '; width: 15%;">Typ</th><th style="background: ' . $info['color'] . '; width: 13%;">Netto</th><th style="background: ' . $info['color'] . '; width: 7%;">%</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT</th><th style="background: ' . $info['color'] . '; width: 13%;">Brutto</th></tr>
 	<tr><td style="text-align: center;">';
 	$n=0;
 	foreach(preg_split('~[\n]+~', $row['description']) as $line){
