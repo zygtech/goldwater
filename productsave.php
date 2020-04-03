@@ -27,7 +27,7 @@
 require_once('config.php');
 include('productview.php');
 if ($_GET['id']!='') {
-include("../mpdf/mpdf.php");
+include("mpdf/mpdf.php");
 $mpdf=new mPDF([
 	'margin_left' => 32,
 	'margin_right' => 25,

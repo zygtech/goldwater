@@ -37,26 +37,26 @@
 		$html = '<body>
 	<div style="position: absolute; text-align: right; top: 55mm; width: 180mm; margin: 0 auto; line-height: 16px; font-size: 14px;">
 	<span style="color: ' . $info['color'] . '; font-weight: bold;">' . $info['display'] . '</span><br />' . str_replace("\n","<br />",$info['contact']) . '</div>
-	<div style="text-align: center; height: 200px;"><img class="logo" src="../logo/' . $_GET['company'] . '.png" /></div>
-	<table class="top"><tr><td style="background: lightgray;">Produkt</td><td style="background: #e7e7e8;">' . 'PR' . sprintf('%04d',$_GET['id']) . '</td><td></td><td></td><td style="background: lightgray;">Date</td><td style="background: #e7e7e8;">' . date('Y-m-d') . '</td></table>
+	<div style="text-align: center; height: 200px;"><img class="logo" src="logo/' . $_GET['company'] . '.png" /></div>
+	<table class="top"><tr><td style="background: lightgray;">Product</td><td style="background: #e7e7e8;">' . 'PR' . sprintf('%04d',$_GET['id']) . '</td><td></td><td></td><td style="background: lightgray;">Date</td><td style="background: #e7e7e8;">' . date('Y-m-d') . '</td></table>
 	<table class="main description">';
 	if ($row['name']!='') $html .= '
-		<tr><th style="background: ' . $info['color'] . ';">Nazwa</th></tr>
+		<tr><th style="background: ' . $info['color'] . ';">Name</th></tr>
 		<tr><td style="text-align: center;">' . $row['name'] . '</td></tr>';
 	if ($row['sku']!='') $html .= '
 	<tr><th style="background: ' . $info['color'] . ';">SKU</th></tr>
 	<tr><td style="text-align: center;">' . $row['sku'] . '</td></tr>';
 	if ($row['price']!='') $html .= '
-	<tr><th style="background: ' . $info['color'] . ';">Cena</th></tr>
+	<tr><th style="background: ' . $info['color'] . ';">Price</th></tr>
 	<tr><td style="text-align: center;">' . number_format($row['price'],2,'.',',') . '</td></tr>';
 	if ($row['vat']!='') $html .= '
 	<tr><th style="background: ' . $info['color'] . ';">Vat</th></tr>
 	<tr><td style="text-align: center;">' . $row['vat'] . '</td></tr>';
 	if ($row['category']!='') $html .= '
-	<tr><th style="background: ' . $info['color'] . ';">Kategoria</th></tr>
+	<tr><th style="background: ' . $info['color'] . ';">Category</th></tr>
 	<tr><td style="text-align: center;">' . $row['category'] . '</td></tr>';
 	if ($row['description']!='') $html .= '
-	<tr><th style="background: ' . $info['color'] . ';">Opis</th></tr>
+	<tr><th style="background: ' . $info['color'] . ';">Description</th></tr>
 	<tr><td style="text-align: center;">' . $row['description'] . '</td></tr>';
 	$html .= '
 	</td></tr>
