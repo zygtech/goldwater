@@ -53,12 +53,12 @@
 <table>
 <tr><td>LOGIN FIRMY*:</td><td><input type="text" name="company" pattern="[A-Za-z0-9\S]{1,20}" minlength="5"/></td></tr>
 <tr><td>NAZWA FIRMY*:</td><td><input type="text" name="display" /></td></tr>
-<tr><td>KATALOG PRODUKTÓW:</td><td><input name="products" type="checkbox" value="1" <?php if ($info['productlist']==1) echo 'checked'; ?> /> (odznacz dla firmy usługowej)</td></tr>
+<tr><td>KATALOG PRODUKTÓW:</td><td><input name="products" type="checkbox" value="1" checked /> (odznacz dla firmy usługowej)</td></tr>
 <tr><td>LOGIN*:</td><td><input type="text" name="login" pattern="[A-Za-z0-9\S]{1,20}" /></td></tr>
 <tr><td>HASŁO*:</td><td><input type="password" name="pass" /></td></tr>
 <tr><td>E-MAIL*:</td><td><input type="text" name="mail" /></td></tr>
 <tr><td>WALUTA*:</td><td><select name="currency"><option>USD</option><option>EUR</option><option>GBP</option><option>PLN</option></select></td></tr>
-<tr><td>LOGO*:</td><td><input type="file" name="logo" /></td></tr>
+<tr><td>LOGO*:</td><td><input id="logo" type="file" name="logo" /><label for="logo">DODAJ LOGO</label></td></tr>
 <tr><td>KOLOR*:</td><td><input type="color" name="color" value="#555555" /></td></tr>
 <tr><td>ADRES:</td><td><textarea name="address" onkeyup="limitTextarea(this,5,50)"></textarea></td></tr>
 <tr><td>KONTAKT:</td><td><textarea name="contact" onkeyup="limitTextarea(this,2,50)"></textarea></td></tr>
