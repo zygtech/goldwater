@@ -59,7 +59,7 @@
 	<tr><td style="text-align: center;">' . $row['category'] . '</td></tr>';
 	if ($row['description']!='') $html .= '
 	<tr><th style="background: ' . $info['color'] . ';">Description</th></tr>
-	<tr><td style="text-align: center;">' . $row['description'] . '</td></tr>';
+	<tr><td style="text-align: center;">' . nl2br($row['description']) . '</td></tr>';
 	$html .= '
 	</td></tr>
 	</table>

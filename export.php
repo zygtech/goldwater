@@ -41,7 +41,7 @@
 				$img='';
 				if (file_exists('products/' . 'PR' . sprintf('%04d',$row['id'])))
 					$img=$url . '/products/' . 'PR' . sprintf('%04d',$row['id']);
-				$csv[]=array('PR' . sprintf('%04d',$row['id']),$row['name'],$row['description'],$row['category'],$row['sku'],number_format($row['price'],2,'.',''),$img);
+				$csv[]=array('PR' . sprintf('%04d',$row['id']),$row['name'],nl2br($row['description']),$row['category'],$row['sku'],number_format($row['price'],2,'.',''),$img);
 			}
 			$out = fopen('export.csv','w');
 			foreach ($csv as $fields)
