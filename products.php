@@ -37,11 +37,11 @@
 		if ($_GET['q']=='') $archivequery=' WHERE `' . $_SESSION['company'] . '_products`.archive=' . $archive; else $archivequery='';
 		if ($_GET['order']=='DESC') $order=' DESC';
 		if ($_GET['sort']=='')
-			$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_products`.id,`' . $_SESSION['company'] . '_products`.name,`' . $_SESSION['company'] . '_products`.category,`' . $_SESSION['company'] . '_products`.price,`' . $_SESSION['company'] . '_products`.added,`' . $_SESSION['company'] . '_products`.archive FROM `' . $_SESSION['company'] . '_products`' . $archivequery . ' ORDER BY id;');
+			$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_products`.id,`' . $_SESSION['company'] . '_products`.name,`' . $_SESSION['company'] . '_products`.category,`' . $_SESSION['company'] . '_products`.sku,`' . $_SESSION['company'] . '_products`.price,`' . $_SESSION['company'] . '_products`.added,`' . $_SESSION['company'] . '_products`.archive FROM `' . $_SESSION['company'] . '_products`' . $archivequery . ' ORDER BY id;');
 		else
-			$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_products`.id,`' . $_SESSION['company'] . '_products`.name,`' . $_SESSION['company'] . '_products`.category,`' . $_SESSION['company'] . '_products`.price,`' . $_SESSION['company'] . '_products`.added,`' . $_SESSION['company'] . '_products`.archive FROM `' . $_SESSION['company'] . '_products`' . $archivequery . ' ORDER BY ' . $_GET['sort'] . $order . ',id;');
+			$result = mysqli_query($link,'SELECT `' . $_SESSION['company'] . '_products`.id,`' . $_SESSION['company'] . '_products`.name,`' . $_SESSION['company'] . '_products`.category,`' . $_SESSION['company'] . '_products`.sku,`' . $_SESSION['company'] . '_products`.price,`' . $_SESSION['company'] . '_products`.added,`' . $_SESSION['company'] . '_products`.archive FROM `' . $_SESSION['company'] . '_products`' . $archivequery . ' ORDER BY `' . $_SESSION['company'] . '_products`.' . $_GET['sort'] . $order . ',id;');
 		?>
-		<tr><th style="width: 10%;"><a href="products.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">ID</a></th><th style="width: 40%;"><a href="products.php?sort=name<?php if ($_GET['sort']=='name' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">NAME</a></th><th style="width: 35%;"><a href="products.php?sort=category<?php if ($_GET['sort']=='category' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CATEGORY</a></th><th style="width: 15%;"><a href="products.php?sort=price<?php if ($_GET['sort']=='price' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">PRICE</a></th><th></th></th><th></th><th></th></tr>
+		<tr><th style="width: 10%;"><a href="products.php?sort=id<?php if ($_GET['sort']=='id' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">ID</a></th><th style="width: 30%;"><a href="products.php?sort=name<?php if ($_GET['sort']=='name' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">NAME</a></th><th style="width: 25%;"><a href="products.php?sort=category<?php if ($_GET['sort']=='category' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">CATEGORY</a></th><th style="width: 20%;"><a href="products.php?sort=sku<?php if ($_GET['sort']=='category' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">SKU</a></th><th style="width: 15%;"><a href="products.php?sort=price<?php if ($_GET['sort']=='price' && $_GET['order']=='') echo '&order=DESC'; ?><?php if ($_GET['archive']=='true') echo '&archive=true'; ?><?php if ($_GET['q']!='') echo '&q=' . $_GET['q']; ?>">PRICE</a></th><th></th></th><th></th><th></th></tr>
 		<?php
 		$p=1; $l=0;
 		while ($row = mysqli_fetch_array($result)) {
@@ -50,10 +50,10 @@
 				$p++;
 			}
 			if ($row['archive']==1 && $_GET['archive']!='true') $archivecolor=' style="background: #eeee99 !important;"'; else $archivecolor='';
-			if ($_GET['q']=='' || strpos(strtolower($row['id']), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['category']), strtolower($_GET['q']))!==false || strpos(strtolower($row['price']), strtolower($_GET['q']))!==false) {				
-				echo '<tr' .  $archivecolor . ' class="pages p' . $p . '"><td style="width: 10%;">PR' . sprintf('%04d',$row['id']) . '</td><td style="width: 40%;">';
+			if ($_GET['q']=='' || strpos(strtolower($row['id']), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['category']), strtolower($_GET['q']))!==false || strpos(strtolower($row['sku']), strtolower($_GET['q']))!==false || strpos(strtolower($row['price']), strtolower($_GET['q']))!==false) {				
+				echo '<tr' .  $archivecolor . ' class="pages p' . $p . '"><td style="width: 10%;">PR' . sprintf('%04d',$row['id']) . '</td><td style="width: 30%;">';
 				echo $row['name'];
-				echo '</td><td style="width: 35%;">' . $row['category'] . '</td><td style="width: 15%;">';
+				echo '</td><td style="width: 25%;">' . $row['category'] . '</td><td style="width: 20%;">' . $row['sku'] . '</td><td style="width: 15%;">';
 				if ($info['currency']=='USD') echo '$'; if ($info['currency']=='EUR') echo '€'; if ($info['currency']=='GBP') echo '£';
 				echo number_format($row['price'],2,'.','');
 				if ($info['currency']=='PLN') echo ' zł';
@@ -71,7 +71,7 @@
 		mysqli_free_result($result);
 		mysqli_close($link);
 		for ($n=$l;$n<15;$n++) 
-			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+			echo '<tr class="pages p' . $p . '"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 	?>
 	</table><br /><center>	
 	<?php 
