@@ -29,7 +29,7 @@
 	$link = mysqli_connect($sql, $sqluser, $sqlpass, $sqldb);
 	mysqli_set_charset($link,'utf8');
 	if ($_POST['id']=='') {
-		mysqli_query($link,'INSERT INTO `' . $_SESSION['company'] . '_products` VALUES (0,"' . strip_tags($_POST['name']) . '",' . $_POST['price'] . ',' . $_POST['vat'] . ',"' . strip_tags($_POST['category']) . '","' . strip_tags($_POST['description']) . '","' . strip_tags($_POST['sku']) . '",NOW(),"' . strip_tags($_POST['added']) . '",' . $_POST['archive'] . ');');
+		mysqli_query($link,'INSERT INTO `' . $_SESSION['company'] . '_products` VALUES (0,"' . strip_tags($_POST['name']) . '",' . $_POST['price'] . ',' . $_POST['vat'] . ',"' . strip_tags($_POST['category']) . '","' . strip_tags($_POST['description']) . '","' . strip_tags($_POST['sku']) . '",NOW(),"' . strip_tags($_SESSION['login']) . '",' . $_POST['archive'] . ');');
 		$id = mysqli_insert_id($link);
 	}
 	elseif (strip_tags($_POST['name'])!='') {
