@@ -46,7 +46,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 	<script>
 		$( document ).ready(function() {
-			$('form input:not([type="submit"])').keydown(function (e) {
+			$('form input:not([name="q"])').keydown(function (e) {
 				if (e.keyCode == 13) {
 					e.preventDefault();
 					return false;
