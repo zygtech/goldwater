@@ -48,25 +48,9 @@
 	if ($client['nip']!='') $html .= '<br />NIP: ' . $client['nip'];
 	$html .=  '</td><td><strong>';
 	if ($client['mail']!='' || $client['mobile']!='') $html .= 'KONTAKT:';
-	$html .= '</strong><br />' . $client['mail'] . '<br />' . $client['mobile'] . '</td>
-	<td style="width: 45%;"></td>
-	</table>
-	<table class="main description"><tr><th style="background: ' . $info['color'] . '; width: 5%;">Lp.</th><th style="background: ' . $info['color'] . '; width: 40%;">Opis</th><th style="background: ' . $info['color'] . '; width: 15%;">Rodzaj</th><th style="background: ' . $info['color'] . '; width: 10%;">Netto</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT (%)</th><th style="background: ' . $info['color'] . '; width: 10%;">Wartość VAT</th><th style="background: ' . $info['color'] . '; width: 10%;">Wartość łączna</th></tr>
-	<tr><td style="text-align: center;">';
-	foreach(preg_split('~[\n]+~', $row['description']) as $line){
-		$i++;
-		if ($line!='') $html .= $i . '<br />';
-    }
-    $html .= '</td><td>' . nl2br($row['description']) . '</td>
-	<td style="height: 70mm;">' . nl2br($row['type']) . '</td><td class="right">';
-	foreach(preg_split('~[\n]+~', $row['netto']) as $line){
-		if ($line==0) $html .= '<br />'; else $html .= number_format($line,2) . '<br />'; 
-	} 
-	$html .= '</td><td>' . nl2br($row['vat']) . '</td>';
 	$n=0;
-	$n=0;
-	foreach(preg_split('~[\n]+~', $row['netto']) as $line){
-		if ($line==0) $netto[$n] = 0; else $netto[$n] = $line; 
+	foreach(preg_split('~[\n]+~', $row['brutto']) as $line){
+		if ($line==0) $brutto[$n] = 0; else $brutto[$n] = $line; 
 		$n++;
 	} 
 	$n=0;
@@ -75,18 +59,30 @@
 		$n++;
 	} 
 	for($i=0;$i<15;$i++) {
-		if ($netto[$i]==0) {
+		if ($brutto[$i]==0) {
 			$vatvalue .= '<br />';
-			$total .= '<br />';
+			$netto .= '<br />';
 		} else {
-			$tmp = $netto[$i]*$vat[$i]/100;
+			$tmp = $brutto[$i]-($brutto[$i]*100/(100+$vat[$i]));
 			$vatvalue .= number_format($tmp,2) . '<br />';
 			$podatek += $tmp;
-			$tmp = $netto[$i]+$tmp;
-			$total .= number_format($tmp,2) . '<br />';
+			$tmp = $brutto[$i]-$tmp;
+			$netto .= number_format($tmp,2,'.','') . '<br />';
 		}
 	}
-	$html .= '<td class="right">' . $vatvalue . '</td><td class="right">' . $total . '</td></tr></table>
+	$html .= '</strong><br />' . $client['mail'] . '<br />' . $client['mobile'] . '</td>
+	<td style="width: 45%;"></td>
+	</table>
+	<table class="main description"><tr><th style="background: ' . $info['color'] . '; width: 6%;">Lp.</th><th style="background: ' . $info['color'] . '; width: 35%;">Opis</th><th style="background: ' . $info['color'] . '; width: 15%;">Typ</th><th style="background: ' . $info['color'] . '; width: 13%;">Netto</th><th style="background: ' . $info['color'] . '; width: 8%;">%</th><th style="background: ' . $info['color'] . '; width: 10%;">VAT</th><th style="background: ' . $info['color'] . '; width: 13%;">Brutto</th></tr>
+	<tr><td style="text-align: center;">';
+	$n=0;
+	foreach(preg_split('~[\n]+~', $row['description']) as $line){
+		$n++;
+		if ($line!='') $html .= $n . '<br />';
+    }
+    $html .= '</td><td>' . nl2br($row['description']) . '</td>
+	<td style="height: 70mm;">' . nl2br($row['type']) . '</td><td class="right">' . $netto . '</td><td>' . nl2br($row['vat']) . '</td>';
+	$html .= '<td class="right">' . $vatvalue . '</td><td class="right">' . $row['brutto'] . '</td></tr></table>
 	<table class="main"><tr><th style="background: ' . $info['color'] . ';">Dodatkowe informacje</td></tr><tr><td style="height: 20mm;">' . $row['info'] . '</td></tr></table>
 	<table class="top"><tr><td></td><td></td><td style="background: ' . $info['color'] . '; color: #ffffff;">PODATEK</td><td style="background: #e7e7e8;">';
 	if ($row['currency']=='USD') $html .= '$'; if ($row['currency']=='EUR') $html .= '€'; if ($row['currency']=='GBP') $html .= '£';
