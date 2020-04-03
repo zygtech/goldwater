@@ -30,7 +30,7 @@
 			$product = mysqli_fetch_array($result);
 		}
 ?>
-	<form action="productedit.php" method="POST">
+	<form action="productedit.php" method="POST" enctype="multipart/form-data">
 	<input type="hidden" name="id" value="<?php echo $product['id']; ?>" />	
 	<table>
 	<tr><td>Product ID:<br /><div class="field" style="text-align: center;"><?php if ($product['id']!='') echo 'PR' . sprintf('%04d',$product['id']); else echo 'AUTO'; ?></div></td>
@@ -69,6 +69,12 @@
 
 	</table><table>
     <tr><td>Description<br /><textarea name="description" onkeyup="limitTextarea(this,5,100)"><?php echo $product['description']; ?></textarea></td></tr>
+	<tr><td><?php
+		if (file_exists('products/' . 'PR' . sprintf('%04d',$product['id'])))
+			echo '<img id="product" src="' . 'products/' . 'PR' . sprintf('%04d',$product['id']) . '" />';	
+	?></td></tr><tr><td>
+		<input type="file" id="photo" name="photo" /><label for="photo"><i class="fa fa-upload"></i> SEND/CHANGE PHOTO</label>
+	</td></tr>
 	<tr><td><input type="submit" value="Save" /></td></tr>
 	</table>
 	</form>

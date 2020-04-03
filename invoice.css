@@ -25,4 +25,5 @@
 	.description th, .description td { text-align: center; }
 	td.right { text-align: right !important; }
 	#footer { vertical-align: bottom; }
+	#product { max-width: 500px; max-height: 500px; }
 	
