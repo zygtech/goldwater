@@ -79,7 +79,7 @@
 		for ($n=1;$n<=$p;$n++) {
 			?><a style="cursor: pointer;" onclick="$('.pages').hide(); $('.p<?php echo $n; ?>').show();"><?php echo $n; ?></a>&nbsp;<?php
 		}
-	?></center>
+	?></center><br />
 	<center><?php if ($_GET['archive']!='true') echo '<a href="products.php?archive=true">Archive</a>'; else echo '<a href="products.php">Back</a>'; ?></center>
 <?php
 	require('template_end.php');
