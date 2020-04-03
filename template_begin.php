@@ -79,14 +79,14 @@
 		}
 		function pricefix(sel)
 		{
-			if (parseFloat($('#price').val())>500000) $('#price').val('500000');
+			if (parseFloat($('#price').val())>9999=) $('#price').val('9999');
 			if (parseFloat($('#price').val())>0) $('#price').val(parseFloat($('#price').val()).toFixed(2)); else $('#price').val('0');
 			if (parseFloat($('#vat').val())>0) $('#vat').val(parseFloat($('#vat').val()).toFixed(0)); else $('#vat').val('0');
 			$('#netto').text((parseFloat($('#price').val())*(100/(100+parseFloat($('#vat').val())))).toFixed(2));
 		}
 		function calcvat(sel,id)
 		{
-			if (parseFloat($('#brutto'+id).val())>500000) $('#brutto'+id).val('500000');
+			if (parseFloat($('#brutto'+id).val())>9999) $('#brutto'+id).val('9999');
 			var vat = ($('#brutto'+id).val()-($('#brutto'+id).val()*(100/(100+parseFloat($('#vat'+id).val())))));
 			$('#vatvalue'+id).text(vat.toFixed(2));
 			var netto = ($('#brutto'+id).val()*(100/(100+parseFloat($('#vat'+id).val()))));
