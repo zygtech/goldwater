@@ -41,15 +41,17 @@ if ($_GET['confirm']=='yes') {
 		mysqli_query($link,$query);
 		$query = 'DROP TABLE `' . $_SESSION['company'] . '_tasks`;';
 		mysqli_query($link,$query);
+		$query = 'DROP TABLE `' . $_SESSION['company'] . '_products`;';
+		mysqli_query($link,$query);
 		$query = 'DROP TABLE `' . $_SESSION['company'] . '_users`;';
 		mysqli_query($link,$query);
 		$query = 'DROP TABLE `' . $_SESSION['company'] . '_info`;';
 		mysqli_query($link,$query);
-		unlink('./logo/' . $_SESSION['company'] . '.png');
+		unlink('../logo/' . $_SESSION['company'] . '.png');
 	};
 	mysqli_close($link);
 ?>
-<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/index.php?logout=true"> 
+<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/pl/index.php?logout=true"> 
 <?php
 } else {
 ?>
@@ -64,14 +66,14 @@ if ($_GET['confirm']=='yes') {
 
 <body>
 	<div class="container">
-<img class="right" src="logo/<?php echo $_SESSION['company']; ?>.png" />
+<img class="right" src="../logo/<?php echo $_SESSION['company']; ?>.png" />
 <h1> Goldwater Business </h1>
 </div>
 <div class="ribbonlogin"><div class="container">
-<h2> DELETE </h2>
+<h2> USUŃ KONTO </h2>
 </div></div>
 <div class="mainlogin"><div class="container">
-<center>Are you sure you want to delete this account: <?php echo $_SESSION['company']; ?>? <a href="deleteaccount.php?confirm=yes">Yes</a></center>
+<center>Czy na pewno chcesz usunąć konto tej firmy: <?php echo $_SESSION['company']; ?>? <a href="deleteaccount.php?confirm=yes">Tak</a></center>
 </div></div>
 <div class="ribbonlogin"><div class="container">
 &nbsp;
