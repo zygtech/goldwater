@@ -58,7 +58,7 @@
 <tr><td>PASSWORD*:</td><td><input type="password" name="pass" /></td></tr>
 <tr><td>E-MAIL*:</td><td><input type="text" name="mail" /></td></tr>
 <tr><td>CURRENCY*:</td><td><select name="currency"><option>USD</option><option>EUR</option><option>GBP</option><option>PLN</option></select></td></tr>
-<tr><td>LOGO*:</td><td><input type="file" name="logo" /></td></tr>
+<tr><td>LOGO*:</td><td><input id="logo" type="file" name="logo" /><label for="logo">UPLOAD LOGO</label></td></tr>
 <tr><td>COLOR*:</td><td><input type="color" name="color" value="#555555" /></td></tr>
 <tr><td>ADDRESS:</td><td><textarea name="address" onkeyup="limitTextarea(this,5,50)"></textarea></td></tr>
 <tr><td>CONTACT:</td><td><textarea name="contact" onkeyup="limitTextarea(this,2,50)"></textarea></td></tr>
