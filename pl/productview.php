@@ -40,8 +40,8 @@
 	<div style="text-align: center; height: 200px;"><img class="logo" src="../logo/' . $_GET['company'] . '.png" /></div>
 	<table class="top"><tr><td style="background: lightgray;">Produkt</td><td style="background: #e7e7e8;">' . 'PR' . sprintf('%04d',$_GET['id']) . '</td><td></td><td></td><td style="background: lightgray;">Date</td><td style="background: #e7e7e8;">' . date('Y-m-d') . '</td></table>
 	<table class="main description">';
-	if (file_exists('../products/' . 'PR' . sprintf('%04d',$row['id'])))
-		$html .= '<tr><td><img id="product" src="' . '../products/' , $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id']) . '" /></td></tr>';
+	if (file_exists('../products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id'])))
+		$html .= '<tr><td><img id="product" src="' . '../products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id']) . '" /></td></tr>';
 	if ($row['name']!='') $html .= '
 		<tr><th style="background: ' . $info['color'] . ';">Nazwa</th></tr>
 		<tr><td style="text-align: center;">' . $row['name'] . '</td></tr>';
