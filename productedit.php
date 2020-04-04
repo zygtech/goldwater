@@ -41,6 +41,6 @@
 	mysqli_free_result($result);
 	mysqli_close($link);
 	if ($_FILES['photo']['tmp_name']!='')
-		move_uploaded_file($_FILES['photo']['tmp_name'],'products/' . 'PR' . sprintf('%04d',$id));
+		move_uploaded_file($_FILES['photo']['tmp_name'],'products/' , $_SESSION['company'] . '_PR' . sprintf('%04d',$id));
 ?>
 <meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/products.php">
