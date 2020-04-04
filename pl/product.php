@@ -35,18 +35,6 @@
 	<table>
 	<tr><td>ID produktu:<br /><div class="field" style="text-align: center;"><?php if ($product['id']!='') echo 'PR' . sprintf('%04d',$product['id']); else echo 'AUTO'; ?></div></td>
 	<td>Data stworzenia:<br /><div class="field" style="text-align: center;"><?php if ($product['creation']!='') echo $product['creation']; else echo date('Y-m-d'); ?>&nbsp;</div></td></tr>
-	<tr><td>Archiwum<br /><select style="text-align-last: center;" name="archive"><option value="1" <?php if ($product['archive']==1) echo 'selected'; ?>>Zarchiwizowane</option><option value="0" <?php if ($product['archive']==0) echo 'selected'; ?>>Niezarchiwizowane</option></select></td>
-	<td>Stworzone przez:<br /><div class="field"><?php if ($job['added']!='') {
-		$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_users` WHERE name="' . $job['added'] . '";');
-		$user = mysqli_fetch_array($result);
-		echo $job['added'] . ' - ' . $user['mail']; 
-	}
-	else {
-		$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_users` WHERE name="' . $_SESSION['login'] . '";');
-		$user = mysqli_fetch_array($result);
-		echo $_SESSION['login'] . ' - ' . $user['mail']; 
-	}
-	?>&nbsp;</div></td></tr>
 	<tr><td>Nazwa<br /><input style="text-align: center;" type="text" name="name" value="<?php echo $product['name']; ?>" maxlength="37" /></td>
 	<td>Cena (brutto)<br /><input id="price" style="text-align: center;" type="text" name="price" maxlength="9" onchange="pricefix(this)" value="<?php if ($product['price']!=0) echo number_format($product['price'],2,'.',''); ?>" /></td></tr>
 	<tr><td>VAT<br /><input id="vat" style="text-align: center;" type="text" name="vat" value="<?php if ($product['vat']>0) echo $product['vat']; else echo '23'; ?>" maxlength="3" onchange="pricefix(this)" /></td>
@@ -71,10 +59,22 @@
 	<tr><td><?php
 		if (file_exists('../products/' . 'PR' . sprintf('%04d',$product['id'])))
 			echo '<img id="product" src="' . '../products/' . 'PR' . sprintf('%04d',$product['id']) . '" />';	
-	?></td></tr><tr><td>
+	?></td></tr>
+	<tr><td>
 		<input type="file" id="photo" name="photo" accept=".jpg,.png" /><label for="photo"><i class="fa fa-upload"></i> WYŚLIJ/ZMIEŃ ZDJĘCIE</label>
 	</td></tr>
-	<tr><td><input type="submit" value="Zapisz" /></td></tr>
+		<tr><td>Stworzone przez:<br /><div class="field"><?php if ($job['added']!='') {
+		$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_users` WHERE name="' . $job['added'] . '";');
+		$user = mysqli_fetch_array($result);
+		echo $job['added'] . ' - ' . $user['mail']; 
+	}
+	else {
+		$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_users` WHERE name="' . $_SESSION['login'] . '";');
+		$user = mysqli_fetch_array($result);
+		echo $_SESSION['login'] . ' - ' . $user['mail']; 
+	}
+	?>&nbsp;</div></td></tr>
+	<tr><td><br /><input type="submit" value="Zapisz" /></td></tr>
 	</table>
 	</form>
 <?php
