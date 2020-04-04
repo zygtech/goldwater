@@ -39,8 +39,8 @@
 		while ($row = mysqli_fetch_array($result)) {
 			if ($_GET['q']=='' || strpos(strtolower($row['id']), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['category']), strtolower($_GET['q']))!==false || strpos(strtolower($row['sku']), strtolower($_GET['q']))!==false || strpos(strtolower($row['price']), strtolower($_GET['q']))!==false) {				
 				$img='';
-				if (file_exists('products/' , $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id'])))
-					$img=$url . '/products/' , $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id']);
+				if (file_exists('products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id'])))
+					$img=$url . '/products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id']);
 				$csv[]=array('PR' . sprintf('%04d',$row['id']),$row['name'],nl2br($row['description']),$row['category'],$row['sku'],number_format($row['price'],2,'.',''),$img);
 			}
 			$out = fopen('export.csv','w');

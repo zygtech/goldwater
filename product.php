@@ -58,8 +58,8 @@
 	</table><table>
     <tr><td>Description<br /><textarea name="description" onkeyup="limitTextarea(this,5,100)"><?php echo $product['description']; ?></textarea></td></tr>
 	<tr><td><?php
-		if (file_exists('products/' , $_SESSION['login'] . '_PR' . sprintf('%04d',$product['id'])))
-			echo '<img id="product" src="' . 'products/' , $_SESSION['company'] . '_PR' . sprintf('%04d',$product['id']) . '" />';	
+		if (file_exists('products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$product['id'])))
+			echo '<img id="product" src="products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$product['id']) . '" />';	
 	?></td></tr>
 	<tr><td>
 		<input type="file" id="photo" name="photo" accept=".jpg,.png" /><label for="photo"><i class="fa fa-upload"></i> SEND/CHANGE PHOTO</label>
