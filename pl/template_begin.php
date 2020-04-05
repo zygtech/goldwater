@@ -73,9 +73,10 @@
 					$('#vat'+id).val(parseFloat($.trim($(this).text().split(' : ')[2])).toFixed(2));
 					$('#type'+id).val('Product');
 					calcvat(sel,id);
-					$(sel).val($.trim($(this).val().split(' : ')[0]))
+					$(sel).val($.trim($(this).val().split(' : ')[0]));
 				}
 			});
+			$(sel).val($(sel).val().substring(0,37));
 		}
 		function pricefix(sel)
 		{
