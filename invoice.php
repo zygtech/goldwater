@@ -73,7 +73,7 @@
 	<table><tr><td style="width: 5% !important;">No.</td><td style="width: 40% !important;">Description</td><td style="width: 15% !important;">Type</td>
 	<td style="width: 10% !important;">Brutto</td><td style="width: 10% !important;">VAT (%)</td><td style="width: 10% !important;">VAT value</td><td style="width: 10% !important;">Netto</td></tr>
 	<?php for($i=0;$i<15;$i++) {
-	?><tr id="row<?php echo $i; ?>" class="row" style="<?php if ($i==0 || $description[$i-1]!='') echo 'display: table-row;'; ?>"><td style="width: 5% !important;"><input disabled class="desc" type="text" id="lp<?php echo $i; ?>" name="id<?php echo $i; ?>" value="<?php if ($description[$i]!='') echo $i+1; ?>" /></td><td style="width: 40% !important;"><input class="desc" type="text" list="products" name="description<?php echo $i; ?>" maxlength="37" onchange="additem(this,<?php echo $i; ?>)" value="<?php echo $description[$i]; ?>" />
+	?><tr id="row<?php echo $i; ?>" class="row" style="<?php if ($i==0 || $description[$i-1]!='') echo 'display: table-row;'; ?>"><td style="width: 5% !important;"><input disabled class="desc" type="text" id="lp<?php echo $i; ?>" name="id<?php echo $i; ?>" value="<?php if ($description[$i]!='') echo $i+1; ?>" /></td><td style="width: 40% !important;"><input class="desc" type="text" list="products" name="description<?php echo $i; ?>" maxlength="255" onchange="additem(this,<?php echo $i; ?>)" value="<?php echo $description[$i]; ?>" />
 	<datalist id="products">
 	<?php
 		if ($invoice['currency']!='') $currency=$invoice['currency']; else $currency=$info['currency'];
