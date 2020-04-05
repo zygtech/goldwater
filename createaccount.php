@@ -100,7 +100,7 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
 		mysqli_query($link,$query);
 		$query = 'CREATE TABLE `' . $_POST['company'] . '_products` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `price` float NOT NULL,
   `vat` int(11) NOT NULL,
