@@ -73,13 +73,14 @@
 					$('#vat'+id).val(parseFloat($.trim($(this).text().split(' : ')[2])).toFixed(2));
 					$('#type'+id).val('Product');
 					calcvat(sel,id);
-					$(sel).val($.trim($(this).val().split(' : ')[0]))
+					$(sel).val($.trim($(this).val().split(' : ')[0]));
 				}
 			});
+			$(sel).val($(sel).val().substring(0,37));
 		}
 		function pricefix(sel)
 		{
-			if (parseFloat($('#price').val())>9999=) $('#price').val('9999');
+			if (parseFloat($('#price').val())>9999) $('#price').val('9999');
 			if (parseFloat($('#price').val())>0) $('#price').val(parseFloat($('#price').val()).toFixed(2)); else $('#price').val('0');
 			if (parseFloat($('#vat').val())>0) $('#vat').val(parseFloat($('#vat').val()).toFixed(0)); else $('#vat').val('0');
 			$('#netto').text((parseFloat($('#price').val())*(100/(100+parseFloat($('#vat').val())))).toFixed(2));
