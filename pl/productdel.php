@@ -37,4 +37,4 @@
 	mysqli_free_result($result);
 	mysqli_close($link);
 ?>
-<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/products.php"> 
+<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/pl/products.php"> 
