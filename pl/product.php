@@ -30,7 +30,7 @@
 			$product = mysqli_fetch_array($result);
 		}
 ?>
-	<form action="productedit.php" method="POST">
+	<form action="productedit.php" method="POST" enctype="multipart/form-data">
 	<input type="hidden" name="id" value="<?php echo $product['id']; ?>" />	
 	<table>
 	<tr><td>ID produktu:<br /><div class="field" style="text-align: center;"><?php if ($product['id']!='') echo 'PR' . sprintf('%04d',$product['id']); else echo 'AUTO'; ?></div></td>
