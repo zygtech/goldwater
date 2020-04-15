@@ -81,7 +81,7 @@
 		}
 	?></center>
 	<span><a href="../export.php?q=<?php echo $_GET['q']; ?>&sort=<?php echo $_GET['sort']; ?>&archive=<?php echo $_GET['archive']; ?>">Eksportuj do CSV</a></span><br />
-	<center><?php if ($_GET['archive']!='true') echo '<a href="products.php?archive=true">Archiwum</a>'; else echo '<a href="products.php">Back</a>'; ?></center>
+	<center><?php if ($_GET['archive']!='true') echo '<a href="products.php?archive=true">Archiwum</a>'; else echo '<a href="products.php">Wstecz</a>'; ?></center>
 <?php
 	require('template_end.php');
 ?>
