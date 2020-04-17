@@ -41,7 +41,6 @@
 	$_SESSION['display']=$display;
 	$_SESSION['products']=$productlist;
 ?>
-?>
 	<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/tasks.php"> 
 <?php
 	}
