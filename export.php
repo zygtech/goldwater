@@ -21,6 +21,12 @@
  * 
  * 
  */
+  		header('Content-Description: CSV Export');
+		header('Content-Type: text/csv');
+		header('Content-Disposition: attachment; filename="export.csv"');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
 		require_once('config.php');
 		session_start();
 		if ($_SESSION['login']=='') exit('Login error! <a href="' . $url . '/">Back</a>');			
@@ -35,20 +41,17 @@
 			$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_products`' . $archivequery . ' ORDER BY id;');
 		else
 			$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_products`' . $archivequery . ' ORDER BY `' . $_SESSION['company'] . '_products`.' . $_GET['sort'] . $order . ',id;');
-		$csv[]=array('post_name','post_title','post_content','product_category','sku','price','featured_image');
+		echo '"post_name","post_title","post_content","product_category","sku","price","featured_image"';
+		echo "\n";
 		while ($row = mysqli_fetch_array($result)) {
 			if ($_GET['q']=='' || strpos(strtolower($row['id']), strtolower($_GET['q']))!==false || strpos(strtolower($row['name']), strtolower($_GET['q']))!==false || strpos(strtolower($row['category']), strtolower($_GET['q']))!==false || strpos(strtolower($row['sku']), strtolower($_GET['q']))!==false || strpos(strtolower($row['price']), strtolower($_GET['q']))!==false) {				
 				$img='';
 				if (file_exists('products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id'])))
 					$img=$url . '/products/' . $_SESSION['company'] . '_PR' . sprintf('%04d',$row['id']);
-				$csv[]=array('PR' . sprintf('%04d',$row['id']),$row['name'],nl2br($row['description']),$row['category'],$row['sku'],number_format($row['price'],2,'.',''),$img);
+				echo 'PR' . sprintf('%04d',$row['id']) . ',"' . $row['name'] . '","' . nl2br($row['description']) . '","' . $row['category'] . '","' . $row['sku'] . '",' . number_format($row['price'],2,'.','') . ',"' . $img . '"';
+				echo "\n";
 			}
-			$out = fopen('export.csv','w');
-			foreach ($csv as $fields)
-				fputcsv($out,$fields);
-			fclose($out);
 		}
 		mysqli_free_result($result);
 		mysqli_close($link);
-		?>
-<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/export.csv"> 		
+		?>		
