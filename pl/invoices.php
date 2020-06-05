@@ -67,5 +67,6 @@
 		}
 	?></center>
 <?php
+	echo '<br /><a href="iexport.php?q=' . $_GET['q'] . '&sort=' . $_GET['sort'] . '&order=' . $_GET['order'] . '" target="_BLANK">Eksport do CSV</a>';
 	require('template_end.php');
 ?>
