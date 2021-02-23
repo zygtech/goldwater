@@ -33,7 +33,7 @@
 		die('Mail już użyty.');
 	$header = 'From: Goldwater <krzysztof@zygtech.pl>';
 	$content = $url . '/pl/setpassword.php?company=' . $_SESSION['company'] . '&login=' . $_POST['login'] . '&mail=' . $_POST['mail'] . '&code=' . md5($_SESSION['company'] . $_POST['mail'] . $_POST['login'] . 'goldwater_pass_check');
-	if ($_SESSION['login']!='' && $_SESSION['company']!='goldwater') 
+	if ($_SESSION['login']!='') 
 		mail($_POST['mail'],$_SESSION['company'] . ' - set your password: ' . $_POST['login'],$content,$header);
 	mysqli_close($link);
 ?>
