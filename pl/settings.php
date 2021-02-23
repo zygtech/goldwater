@@ -52,7 +52,6 @@
 <div id="box">
 <table>
 <tr><td>LOGIN FIRMY:</td><td><?php echo $_SESSION['company']; ?></td></tr>
-<tr><td>KLUCZ LICENCJI:</td><td><?php if ($_SESSION['company']!='goldwater') echo '<a href="https://gumroad.com/subscriptions/' . $_SESSION['subscribtion'] . '/manage" target="_blank">'; else echo '<a href="#">'; ?><?php echo $info['license']; ?></a></td></tr>
 <tr><td>NAZWA FIRMY:</td><td><input type="text" name="display" value="<?php echo $info['display']; ?>" /></td></tr>
 <tr><td>KATALOG PRODUKTÓW:</td><td><input name="products" type="checkbox" value="1" <?php if ($info['productlist']==1) echo 'checked'; ?> /> (odznacz dla firmy usługowej)</td></tr>
 <tr><td>WALUTA:</td><td><select name="currency"><option <?php if ($info['currency']=='USD') echo 'selected'; ?>>USD</option><option <?php if ($info['currency']=='EUR') echo 'selected'; ?>>EUR</option><option <?php if ($info['currency']=='GBP') echo 'selected'; ?>>GBP</option><option <?php if ($info['currency']=='PLN') echo 'selected'; ?>>PLN</option></select></td></tr>
