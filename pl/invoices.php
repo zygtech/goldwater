@@ -50,7 +50,7 @@
 				if ($row['currency']=='USD') echo '$'; if ($row['currency']=='EUR') echo '€'; if ($row['currency']=='GBP') echo '£';
 				echo number_format($row['total'],2,'.','');
 				if ($row['currency']=='PLN') echo ' zł';
-				echo '</td><td><a href="invoicepdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Obejrzyj fakturę"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="invoicesave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Zapisz fakturę"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><a href="invoice.php?id=' . $row['id'] . '" title="Edytuj fakturę"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a class="confirm" href="invoicedel.php?id=' . $row['id'] . '" title="Usuń fakturę"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>';
+				echo '</td><td><a href="invoicepdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '&c=' . md5($row['id'] . $_SESSION['company'] . 'IGW') . '" title="Obejrzyj fakturę"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="invoicesave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '&c=' . md5($row['id'] . $_SESSION['company'] . 'IGW') . '" title="Zapisz fakturę"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><a href="invoice.php?id=' . $row['id'] . '" title="Edytuj fakturę"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td><td><a class="confirm" href="invoicedel.php?id=' . $row['id'] . '" title="Usuń fakturę"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>';
 				$l++;
 			}
 		}

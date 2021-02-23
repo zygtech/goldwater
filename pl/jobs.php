@@ -74,7 +74,7 @@
 					<option <?php if ($row['priority']=='3') echo 'selected'; ?>>3</option>
 				</select>
 				<?php
-				echo '</td><td><center><a href="task.php?id=' . $row['id'] . '" title="Dodaj zadania"><i class="fa fa-tasks" aria-hidden="true"></i></a></center></td><td><a href="jobpdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Obejrzyj info"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="jobsave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Zapisz info"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><center>';
+				echo '</td><td><center><a href="task.php?id=' . $row['id'] . '" title="Dodaj zadania"><i class="fa fa-tasks" aria-hidden="true"></i></a></center></td><td><a href="jobpdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '&c=' . md5($row['id'] . $_SESSION['company'] . 'JGW') . '" title="Obejrzyj info"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="jobsave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '&c=' . md5($row['id'] . $_SESSION['company'] . 'JGW') . '" title="Zapisz info"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><center>';
 				if ($row['archive']==0)
 					echo '<a href="job.php?id=' . $row['id'] . '" title="Edytuj zlecenie"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
 				else

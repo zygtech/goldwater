@@ -65,7 +65,7 @@
 					<option <?php if ($row['priority']=='3') echo 'selected'; ?>>3</option>
 				</select>
 				<?php
-				echo '</td><td><a href="clientpdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Obejrzyj info"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="clientsave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '" title="Zapisz info"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><center><a href="client.php?id=' . $row['id'] . '" title="Edytuj klienta"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></center></td><td><center><a class="confirm" href="clientdel.php?id=' . $row['id'] . '" title="Usuń klienta"><i class="fa fa-trash" aria-hidden="true"></i></a></center></td></tr>';  
+				echo '</td><td><a href="clientpdf.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '&c=' . md5($row['id'] . $_SESSION['company'] . 'CGW') . '" title="Obejrzyj info"><i class="fa fa-search" aria-hidden="true"></i></a></td><td><a href="clientsave.php?id=' . $row['id'] . '&company=' . $_SESSION['company'] . '&c=' . md5($row['id'] . $_SESSION['company'] . 'CGW') . '" title="Zapisz info"><i class="fa fa-save" aria-hidden="true"></i></a></td><td><center><a href="client.php?id=' . $row['id'] . '" title="Edytuj klienta"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></center></td><td><center><a class="confirm" href="clientdel.php?id=' . $row['id'] . '" title="Usuń klienta"><i class="fa fa-trash" aria-hidden="true"></i></a></center></td></tr>';  
 				$l++;
 			}			
 		}

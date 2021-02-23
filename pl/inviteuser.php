@@ -25,21 +25,16 @@
 
 <?php
 	require_once('config.php');
+	session_start();
 	$link = mysqli_connect($sql, $sqluser, $sqlpass, $sqldb);
 	mysqli_set_charset($link,'utf8');
-	$result = mysqli_query($link,'SELECT * FROM `' . $_POST['company'] . '_users`;');
-	if (mysqli_num_rows($result)==0)
-		die('Błędna nazwa firmy.');
-	$result = mysqli_query($link,'SELECT * FROM `' . $_POST['company'] . '_users` WHERE name="' . $_POST['login'] . '";');
+	$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_users` WHERE name="' . $_POST['mail'] . '";');
 	if (mysqli_num_rows($result)>0)
-		die('Użytkownik już istnieje.');
-	$result = mysqli_query($link,'SELECT * FROM `' . $_POST['company'] . '_users` WHERE mail="' . $_POST['mail'] . '";');
-	if (mysqli_num_rows($result)>0)
-		die('Mail już zarejestrowany w tej firmie.');
-	if ($_POST['mail']!='' && $_POST['login']!='' && $_POST['password']!='' && $_POST['check']==md5($_POST['company'] . $_POST['mail'] . $_POST['login'] . 'goldwater_pass_check')) {
-		$query = 'INSERT INTO `' . $_POST['company'] . '_users` VALUES (0,"' . $_POST['login'] . '","' . $_POST['mail'] . '","' . md5($_POST['password']) . '");';
-		mysqli_query($link,$query);
-	};
+		die('Mail już użyty.');
+	$header = 'From: Goldwater <krzysztof@zygtech.pl>';
+	$content = $url . '/pl/setpassword.php?company=' . $_SESSION['company'] . '&login=' . $_POST['login'] . '&mail=' . $_POST['mail'] . '&code=' . md5($_SESSION['company'] . $_POST['mail'] . $_POST['login'] . 'goldwater_pass_check');
+	if ($_SESSION['login']!='' && $_SESSION['company']!='goldwater') 
+		mail($_POST['mail'],$_SESSION['company'] . ' - set your password: ' . $_POST['login'],$content,$header);
 	mysqli_close($link);
 ?>
-<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/pl/" />
+<meta http-equiv="refresh" content="0;url=<?php echo $url; ?>/pl/settings.php" />
