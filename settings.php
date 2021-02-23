@@ -28,16 +28,22 @@
 		$result = mysqli_query($link,'SELECT * FROM `' . $_SESSION['company'] . '_info`;');
 		$info = mysqli_fetch_array($result);
 		mysqli_free_result($result);
+		$result = mysqli_query($link,'SELECT id FROM `' . $_SESSION['company'] . '_users` WHERE name="' . $_SESSION['login'] . '";');
+		$user = mysqli_fetch_array($result);
+		mysqli_free_result($result);
 ?>
 <h1>Settings</h1>
 <h2>User</h2>
-<form action="adduser.php" method="POST">
+<form action="inviteuser.php" method="POST">
 <div id="box">
 <table>
 <tr><td>LOGIN:</td><td><input type="text" name="login" pattern="[A-Za-z0-9\S]{1,20}" /></td></tr>
-<tr><td>PASSWORD:</td><td><input type="password" name="pass" /></td></tr>
 <tr><td>E-MAIL:</td><td><input type="text" name="mail" /></td></tr>
-<tr><td></td><td><input type="submit" value="ADD USER" /></td></tr>
+<tr><td></td><td><input type="submit" value="INVITE NEW USER" /></td></tr>
+<?php
+	if ($user['id']!=1) 
+		echo '<tr><td></td><td><a href="deleteuser.php?id=' . $user['id'] . '">DELETE CURRENT USER</a></td></tr>';
+?>
 </table>
 </div>
 </form>
@@ -46,6 +52,7 @@
 <div id="box">
 <table>
 <tr><td>COMPANY LOGIN:</td><td><?php echo $_SESSION['company']; ?></td></tr>
+<tr><td>LICENSE KEY:</td><td><?php if ($_SESSION['company']!='goldwater') echo '<a href="https://gumroad.com/subscriptions/' . $_SESSION['subscribtion'] . '/manage" target="_blank">'; else echo '<a href="#">'; ?><?php echo $info['license']; ?></a></td></tr>
 <tr><td>DISPLAY NAME:</td><td><input type="text" name="display" value="<?php echo $info['display']; ?>" /></td></tr>
 <tr><td>PRODUCT CATALOG:</td><td><input name="products" type="checkbox" value="1" <?php if ($info['productlist']==1) echo 'checked'; ?> /> (uncheck for services only)</td></tr>
 <tr><td>CURRENCY:</td><td><select name="currency"><option <?php if ($info['currency']=='USD') echo 'selected'; ?>>USD</option><option <?php if ($info['currency']=='EUR') echo 'selected'; ?>>EUR</option><option <?php if ($info['currency']=='GBP') echo 'selected'; ?>>GBP</option><option <?php if ($info['currency']=='PLN') echo 'selected'; ?>>PLN</option></select></td></tr>

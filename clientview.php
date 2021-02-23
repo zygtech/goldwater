@@ -26,6 +26,8 @@
 <?php
 	require_once('config.php');
 	session_start();
+	if ($_GET['c']!=md5($_GET['id'] . $_GET['company'] . 'CGW'))
+		die('Wrong checksum.');
 	if ($_GET['id']!='') {
 		$link = mysqli_connect($sql, $sqluser, $sqlpass, $sqldb);
 		mysqli_set_charset($link,'utf8');
