@@ -41,7 +41,7 @@
 </div></div>
 <div class="mainlogin"><div class="container">
 <form action="adduser.php" method="POST">
-<center><table><tr><td><input type="password" name="password" /></td><td><input type="submit" value="SET PASSWORD" /></td></tr></table> </center>
+<div id="box"><center><table><tr><td>NEW PASSWORD</td><td><input type="password" name="password" /></td></tr><td></td><td><input type="submit" value="SET PASSWORD" /></td></tr></table></center></div>
 <input type="hidden" name="check" value="<?php echo $_GET['code']; ?>" />
 <input type="hidden" name="company" value="<?php echo $_GET['company']; ?>" />
 <input type="hidden" name="mail" value="<?php echo $_GET['mail']; ?>" />
